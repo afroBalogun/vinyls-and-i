@@ -21,7 +21,6 @@ const SaveButton = ({ recordId, initialSaved }: SaveButtonProps) => {
         if (!userId || isLoading) return;
         
         setIsLoading(true);
-        // Optimistic UI update
         const newState = !isSaved;
         setIsSaved(newState);
 
@@ -36,7 +35,7 @@ const SaveButton = ({ recordId, initialSaved }: SaveButtonProps) => {
         }
     };
 
-    if (!userId) return null; // Or show a disabled "Login to Archive" state
+    if (!userId) return null;
 
     return (
         <button

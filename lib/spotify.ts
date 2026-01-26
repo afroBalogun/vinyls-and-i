@@ -64,7 +64,7 @@ export async function getDeepArchiveData(albumId: string) {
 
     const firstTrackId = album.tracks.items[0]?.id;
     let technicalData = { tempo: "N/A", key: "N/A", loudness: "N/A" };
-    let debugInfo = {}; 
+    let debugInfo = {};
 
     if (firstTrackId) {
         const featRes = await fetch(`https://api.spotify.com/v1/audio-features/${firstTrackId}`, {
@@ -98,4 +98,42 @@ export async function getDeepArchiveData(albumId: string) {
             duration: `${Math.floor(t.duration_ms / 60000)}:${Math.floor((t.duration_ms % 60000) / 1000).toString().padStart(2, '0')}`
         }))
     };
+}
+
+export async function getTrendingAlbums() {
+    try {
+        const token = await getSpotifyToken();
+        
+        // Use the official Spotify 'New Releases' endpoint
+        const response = await fetch(
+            "https://api.spotify.com/v1/browse/new-releases?limit=10",
+            {
+                headers: { 
+                    Authorization: `Bearer ${token}` 
+                },
+                next: { revalidate: 3600 } 
+            }
+        );
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("SPOTIFY_API_ERROR:", response.status, errorData);
+            return [];
+        }
+
+        const data = await response.json();
+
+        // New Releases returns an 'albums' object containing an 'items' array
+        return data.albums.items.map((album: any) => ({
+            spotifyId: album.id,
+            title: album.name,
+            artistName: album.artists[0].name,
+            albumCover: album.images[0]?.url,
+            year: album.release_date.split("-")[0],
+            totalTracks: album.total_tracks
+        }));
+    } catch (error) {
+        console.error("CRITICAL_CONNECTION_FAILURE:", error);
+        return [];
+    }
 }

@@ -129,7 +129,7 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
 
                     {/* Large Editorial Title */}
                     <div className="relative">
-                        <h1 className="text-8xl capitalize font-bold tracking-tighter leading-[0.85] text-zinc-900 relative z-10">
+                        <h1 className="text-6xl md:text-8xl capitalize font-bold tracking-tighter leading-[0.85] text-zinc-900 relative z-10">
                             {record.title}<span className="text-zinc-300">.</span>
                         </h1>
                         <p className="text-2xl md:text-3xl italic font-serif text-zinc-500 mt-4">{record.phoneticOrCategory}</p>
@@ -165,6 +165,8 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
                     </footer>
                 </div>
             </div>
+
+            
             {/* 3. TRACKLIST SECTION: The Technical Manifest */}
             {tracks && (
                 <section className="max-w-7xl mx-auto mt-40 px-4 pb-40">

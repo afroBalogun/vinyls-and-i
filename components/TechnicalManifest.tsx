@@ -1,4 +1,3 @@
-// components/record/TechnicalManifest.tsx
 "use client";
 import { useState } from "react";
 
@@ -9,7 +8,7 @@ export default function TechnicalManifest({ record }: { record: any }) {
         <div className="border border-zinc-200 bg-zinc-50 p-6 font-mono text-[10px] uppercase tracking-wider">
             <div className="flex justify-between items-center mb-6">
                 <h3 className="font-bold text-zinc-400">System_Output // Technical_Specs</h3>
-                <button 
+                <button
                     onClick={() => setShowJson(!showJson)}
                     className="hover:bg-zinc-900 hover:text-white px-2 py-1 border border-zinc-900 transition-colors"
                 >

@@ -1,25 +1,35 @@
 import Link from "next/link";
-import PlaybackClock from "./PlaybackClock";
-import AuthButton from "./AuthButton";
+import { Suspense } from "react";
+import LoginBtn from "./LoginBtn";
 
-export default function Navbar() {
+export default async function Navbar() {
+
     return (
-        <nav className="fixed w-full px-5 md:px-10 py-4 flex justify-between border-zinc-200  z-90">
-            <Link href="/" className="font-semibold font-mono text-sm tracking-widest text-zinc-700 hover:text-zinc-900 transition-colors">
+        <nav className="fixed w-full px-4 md:px-10 py-4 flex flex-wrap items-center justify-between border-b border-zinc-200/50 bg-primary backdrop-blur-md z-100">
+            {/* Logo */}
+            <Link href="/" className="font-semibold font-mono text-sm tracking-widest text-secondary hover:text-zinc-900 transition-colors">
                 Vinyls & I
             </Link>
 
-            <div className="flex gap-4">
-                <Link href="/records" className="font-mono text-sm tracking-widest text-zinc-900 hover:text-zinc-700 transition-all cursor-pointer duration-200">
+            {/* Links - Scrollable on very small screens */}
+            <div className="flex order-3 w-full mt-4 md:mt-0 md:w-auto md:order-2 gap-4 md:gap-8 overflow-x-auto no-scrollbar pb-2 md:pb-0">
+                <Link href="/community-feed" className="font-mono text-[10px] md:text-xs tracking-widest text-secondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
+                    Community
+                </Link>
+                <Link href="/records" className="font-mono text-[10px] md:text-xs tracking-widest text-decondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
                     Records
                 </Link>
-                <Link href="/profile" className="font-mono text-sm tracking-widest text-zinc-900 hover:text-zinc-700 transition-all cursor-pointer duration-200">
+                <Link href="/profile" className="font-mono text-[10px] md:text-xs tracking-widest text-secondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
                     Profile
                 </Link>
             </div>
 
-            <AuthButton/>
-            <PlaybackClock />
+            {/* Actions */}
+            <div className="flex items-center gap-3 md:gap-6 order-2 md:order-3">
+                <Suspense fallback={<div className="w-10 h-4 bg-zinc-100 animate-pulse" />}>
+                    <LoginBtn />
+                </Suspense>
+            </div>
         </nav>
     )
 }

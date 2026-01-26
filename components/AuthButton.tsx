@@ -1,55 +1,57 @@
 "use client"
-import { Github, Loader2, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { Button } from "./ui/button";
-import { signIn, signOut, useSession } from "@/lib/auth-client";
+import { signIn, signOut } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import Link from "next/link";
+import { useCurrentUser } from "@/auth-provider";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
-export default function AuthButton() {
-    const { data: session, isPending } = useSession();
 
-    if (isPending) {
-        return (
-            <div className="flex items-center gap-2 text-muted-foreground">
-                <Loader2 className="animate-spin w-4 h-4" />
-                Loading...
-            </div>
-        );
-    }
+export default function AuthButton({ authProvider }: { authProvider: string }) {
+    const currentUser = useCurrentUser();
+
     const signInBtn = async () => {
         await signIn.social({
-            provider: "github",
+            provider: authProvider,
         })
     };
 
-    if (session?.user) {
+    if (currentUser) {
         return (
             <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                    <Avatar className="w-8 h-8">
-                        <AvatarImage
-                            src={session.user.image || ""}
-                            alt={session.user.name || "User"}
-                        />
-                        <AvatarFallback>{session.user.name?.[0] || "U"}</AvatarFallback>
+                <Link href="/profile" className="flex items-center gap-2 group cursor-pointer">
+                    <Avatar className="w-6 h-6 grayscale border border-secondary/20">
+                        <AvatarImage src={currentUser.image || ""} />
+                        <AvatarFallback className="text-[10px] bg-transparent">{currentUser.name?.[0]}</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm">
-                        {session.user.name || session.user.email}
+                    <span className="text-[10px] font-mono uppercase tracking-tight text-secondary">
+                        {currentUser.name?.split(' ')[0] || "User"}
                     </span>
-                </div>
-                <Button variant="outline" size="sm" onClick={() => signOut()}>
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
-                </Button>
+                </Link>
+                <button
+                    onClick={() => signOut()}
+                    className="text-secondary opacity-40 hover:opacity-100 transition-opacity"
+                >
+                    <LogOut className="w-3.5 h-3.5" />
+                </button> 
             </div>
         );
     }
 
     return (
-        <Button onClick={signInBtn} variant={"outline"}>
-            <Github />
-            Sign In with Github
+        <Button
+            onClick={signInBtn}
+            variant="outline"
+            className="w-full rounded-none border-secondary/30 font-mono text-[10px] uppercase tracking-widest hover:bg-secondary hover:text-white transition-all h-10 px-4 hover:cursor-pointer duration-200"
+        >
+            {
+                authProvider === "github" ?
+                    <FaGithub className="w-3 h-3 mr-2" />
+                    : < FaGoogle className="w-3 h-3 mr-2" />
+
+            }
+            Connect_ID using {authProvider}
         </Button>
     )
-
 }
-

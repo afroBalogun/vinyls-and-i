@@ -3,14 +3,14 @@ import Link from 'next/link';
 const ArticleHero = ({ id, slug, title, category, catalogNumber, year, description, artistName, albumCover, artistImage }: { id: string, slug: string, title: string, category: string, catalogNumber: string, year: string, description: string, artistName: string, albumCover: string, artistImage: string }) => {
     return (
         <Link href={`/records/${slug}`}>
-            <article className="relative min-h-screen w-full text-zinc-900 p-6 md:p-12 font-sans selection:bg-zinc-200">
+            <article className="relative min-h-screen w-full text-zinc-900 p-6 md:p-12 font-sans selection:bg-zinc-200 group">
 
                 {/* Top Header - "Words" Style Logo */}
-                <div className="absolute top-8 right-8 md:top-12 md:right-12">
+                <div className="absolute top-8 right-8 md:top-12 md:right-12 ">
                     <div className="border-2 border-zinc-500 p-1 leading-none text-right font-bold text-xl md:text-2xl uppercase tracking-tighter text-zinc-500 border- z-10 relative bg-[#fdfdfd]">
                         vinyls <br />& <br /> I.
                     </div>
-                    <div className="bg-zinc-700 h-18 w-18 md:h-20 md:w-20 rounded-full absolute top-0 right-7 md:top-0.5 md:right-10 border-4 border-zinc-100 flex items-center justify-center">
+                    <div className="bg-zinc-700 h-18 w-18 md:h-20 md:w-20 rounded-full absolute top-0 right-7 md:top-0.5 md:right-10 border-4 border-zinc-100 flex items-center justify-center group-hover:-translate-x-10 duration-200">
                         <div className="bg-zinc-200 h-8 w-8 rounded-full">
 
                         </div>

@@ -2,18 +2,15 @@
 import { useEffect, useState } from "react";
 
 export default function PlaybackClock() {
-  const [time, setTime] = useState<Date | null>(null); // Start with null
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    // This only runs on the client
     setTime(new Date());
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // If time is null, we are still on the server or the very first frame of client-side.
-  // Return null or a placeholder to keep the server/client HTML identical (empty).
-  if (!time) return null; 
+  if (!time) return null;
 
   const hh = String(time.getHours()).padStart(2, "0");
   const mm = String(time.getMinutes()).padStart(2, "0");

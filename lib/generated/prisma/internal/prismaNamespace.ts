@@ -1133,7 +1133,8 @@ export const RecordScalarFieldEnum = {
   loudness: 'loudness',
   spotifyId: 'spotifyId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  authorId: 'authorId'
 } as const
 
 export type RecordScalarFieldEnum = (typeof RecordScalarFieldEnum)[keyof typeof RecordScalarFieldEnum]

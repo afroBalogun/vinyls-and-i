@@ -44,6 +44,7 @@ export type RecordMinAggregateOutputType = {
   spotifyId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  authorId: string | null
 }
 
 export type RecordMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type RecordMaxAggregateOutputType = {
   spotifyId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  authorId: string | null
 }
 
 export type RecordCountAggregateOutputType = {
@@ -88,6 +90,7 @@ export type RecordCountAggregateOutputType = {
   spotifyId: number
   createdAt: number
   updatedAt: number
+  authorId: number
   _all: number
 }
 
@@ -112,6 +115,7 @@ export type RecordMinAggregateInputType = {
   spotifyId?: true
   createdAt?: true
   updatedAt?: true
+  authorId?: true
 }
 
 export type RecordMaxAggregateInputType = {
@@ -134,6 +138,7 @@ export type RecordMaxAggregateInputType = {
   spotifyId?: true
   createdAt?: true
   updatedAt?: true
+  authorId?: true
 }
 
 export type RecordCountAggregateInputType = {
@@ -156,6 +161,7 @@ export type RecordCountAggregateInputType = {
   spotifyId?: true
   createdAt?: true
   updatedAt?: true
+  authorId?: true
   _all?: true
 }
 
@@ -251,6 +257,7 @@ export type RecordGroupByOutputType = {
   spotifyId: string
   createdAt: Date
   updatedAt: Date
+  authorId: string
   _count: RecordCountAggregateOutputType | null
   _min: RecordMinAggregateOutputType | null
   _max: RecordMaxAggregateOutputType | null
@@ -294,9 +301,11 @@ export type RecordWhereInput = {
   spotifyId?: Prisma.StringFilter<"Record"> | string
   createdAt?: Prisma.DateTimeFilter<"Record"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Record"> | Date | string
+  authorId?: Prisma.StringFilter<"Record"> | string
   tracks?: Prisma.TrackListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   savedBy?: Prisma.UserListRelationFilter
+  author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type RecordOrderByWithRelationInput = {
@@ -319,9 +328,11 @@ export type RecordOrderByWithRelationInput = {
   spotifyId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
   tracks?: Prisma.TrackOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   savedBy?: Prisma.UserOrderByRelationAggregateInput
+  author?: Prisma.UserOrderByWithRelationInput
 }
 
 export type RecordWhereUniqueInput = Prisma.AtLeast<{
@@ -347,9 +358,11 @@ export type RecordWhereUniqueInput = Prisma.AtLeast<{
   spotifyId?: Prisma.StringFilter<"Record"> | string
   createdAt?: Prisma.DateTimeFilter<"Record"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Record"> | Date | string
+  authorId?: Prisma.StringFilter<"Record"> | string
   tracks?: Prisma.TrackListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   savedBy?: Prisma.UserListRelationFilter
+  author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "slug">
 
 export type RecordOrderByWithAggregationInput = {
@@ -372,6 +385,7 @@ export type RecordOrderByWithAggregationInput = {
   spotifyId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
   _count?: Prisma.RecordCountOrderByAggregateInput
   _max?: Prisma.RecordMaxOrderByAggregateInput
   _min?: Prisma.RecordMinOrderByAggregateInput
@@ -400,6 +414,7 @@ export type RecordScalarWhereWithAggregatesInput = {
   spotifyId?: Prisma.StringWithAggregatesFilter<"Record"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Record"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Record"> | Date | string
+  authorId?: Prisma.StringWithAggregatesFilter<"Record"> | string
 }
 
 export type RecordCreateInput = {
@@ -425,6 +440,7 @@ export type RecordCreateInput = {
   tracks?: Prisma.TrackCreateNestedManyWithoutRecordInput
   comments?: Prisma.CommentCreateNestedManyWithoutRecordInput
   savedBy?: Prisma.UserCreateNestedManyWithoutSavedRecordsInput
+  author: Prisma.UserCreateNestedOneWithoutUploadedRecordsInput
 }
 
 export type RecordUncheckedCreateInput = {
@@ -447,6 +463,7 @@ export type RecordUncheckedCreateInput = {
   spotifyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId: string
   tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutRecordInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutRecordInput
   savedBy?: Prisma.UserUncheckedCreateNestedManyWithoutSavedRecordsInput
@@ -475,6 +492,7 @@ export type RecordUpdateInput = {
   tracks?: Prisma.TrackUpdateManyWithoutRecordNestedInput
   comments?: Prisma.CommentUpdateManyWithoutRecordNestedInput
   savedBy?: Prisma.UserUpdateManyWithoutSavedRecordsNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutUploadedRecordsNestedInput
 }
 
 export type RecordUncheckedUpdateInput = {
@@ -497,6 +515,7 @@ export type RecordUncheckedUpdateInput = {
   spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
   tracks?: Prisma.TrackUncheckedUpdateManyWithoutRecordNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutRecordNestedInput
   savedBy?: Prisma.UserUncheckedUpdateManyWithoutSavedRecordsNestedInput
@@ -522,6 +541,7 @@ export type RecordCreateManyInput = {
   spotifyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId: string
 }
 
 export type RecordUpdateManyMutationInput = {
@@ -566,6 +586,7 @@ export type RecordUncheckedUpdateManyInput = {
   spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type RecordListRelationFilter = {
@@ -598,6 +619,7 @@ export type RecordCountOrderByAggregateInput = {
   spotifyId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
 }
 
 export type RecordMaxOrderByAggregateInput = {
@@ -620,6 +642,7 @@ export type RecordMaxOrderByAggregateInput = {
   spotifyId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
 }
 
 export type RecordMinOrderByAggregateInput = {
@@ -642,6 +665,7 @@ export type RecordMinOrderByAggregateInput = {
   spotifyId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  authorId?: Prisma.SortOrder
 }
 
 export type RecordScalarRelationFilter = {
@@ -655,9 +679,23 @@ export type RecordCreateNestedManyWithoutSavedByInput = {
   connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
 }
 
+export type RecordCreateNestedManyWithoutAuthorInput = {
+  create?: Prisma.XOR<Prisma.RecordCreateWithoutAuthorInput, Prisma.RecordUncheckedCreateWithoutAuthorInput> | Prisma.RecordCreateWithoutAuthorInput[] | Prisma.RecordUncheckedCreateWithoutAuthorInput[]
+  connectOrCreate?: Prisma.RecordCreateOrConnectWithoutAuthorInput | Prisma.RecordCreateOrConnectWithoutAuthorInput[]
+  createMany?: Prisma.RecordCreateManyAuthorInputEnvelope
+  connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+}
+
 export type RecordUncheckedCreateNestedManyWithoutSavedByInput = {
   create?: Prisma.XOR<Prisma.RecordCreateWithoutSavedByInput, Prisma.RecordUncheckedCreateWithoutSavedByInput> | Prisma.RecordCreateWithoutSavedByInput[] | Prisma.RecordUncheckedCreateWithoutSavedByInput[]
   connectOrCreate?: Prisma.RecordCreateOrConnectWithoutSavedByInput | Prisma.RecordCreateOrConnectWithoutSavedByInput[]
+  connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+}
+
+export type RecordUncheckedCreateNestedManyWithoutAuthorInput = {
+  create?: Prisma.XOR<Prisma.RecordCreateWithoutAuthorInput, Prisma.RecordUncheckedCreateWithoutAuthorInput> | Prisma.RecordCreateWithoutAuthorInput[] | Prisma.RecordUncheckedCreateWithoutAuthorInput[]
+  connectOrCreate?: Prisma.RecordCreateOrConnectWithoutAuthorInput | Prisma.RecordCreateOrConnectWithoutAuthorInput[]
+  createMany?: Prisma.RecordCreateManyAuthorInputEnvelope
   connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
 }
 
@@ -674,6 +712,20 @@ export type RecordUpdateManyWithoutSavedByNestedInput = {
   deleteMany?: Prisma.RecordScalarWhereInput | Prisma.RecordScalarWhereInput[]
 }
 
+export type RecordUpdateManyWithoutAuthorNestedInput = {
+  create?: Prisma.XOR<Prisma.RecordCreateWithoutAuthorInput, Prisma.RecordUncheckedCreateWithoutAuthorInput> | Prisma.RecordCreateWithoutAuthorInput[] | Prisma.RecordUncheckedCreateWithoutAuthorInput[]
+  connectOrCreate?: Prisma.RecordCreateOrConnectWithoutAuthorInput | Prisma.RecordCreateOrConnectWithoutAuthorInput[]
+  upsert?: Prisma.RecordUpsertWithWhereUniqueWithoutAuthorInput | Prisma.RecordUpsertWithWhereUniqueWithoutAuthorInput[]
+  createMany?: Prisma.RecordCreateManyAuthorInputEnvelope
+  set?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  disconnect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  delete?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  update?: Prisma.RecordUpdateWithWhereUniqueWithoutAuthorInput | Prisma.RecordUpdateWithWhereUniqueWithoutAuthorInput[]
+  updateMany?: Prisma.RecordUpdateManyWithWhereWithoutAuthorInput | Prisma.RecordUpdateManyWithWhereWithoutAuthorInput[]
+  deleteMany?: Prisma.RecordScalarWhereInput | Prisma.RecordScalarWhereInput[]
+}
+
 export type RecordUncheckedUpdateManyWithoutSavedByNestedInput = {
   create?: Prisma.XOR<Prisma.RecordCreateWithoutSavedByInput, Prisma.RecordUncheckedCreateWithoutSavedByInput> | Prisma.RecordCreateWithoutSavedByInput[] | Prisma.RecordUncheckedCreateWithoutSavedByInput[]
   connectOrCreate?: Prisma.RecordCreateOrConnectWithoutSavedByInput | Prisma.RecordCreateOrConnectWithoutSavedByInput[]
@@ -684,6 +736,20 @@ export type RecordUncheckedUpdateManyWithoutSavedByNestedInput = {
   connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
   update?: Prisma.RecordUpdateWithWhereUniqueWithoutSavedByInput | Prisma.RecordUpdateWithWhereUniqueWithoutSavedByInput[]
   updateMany?: Prisma.RecordUpdateManyWithWhereWithoutSavedByInput | Prisma.RecordUpdateManyWithWhereWithoutSavedByInput[]
+  deleteMany?: Prisma.RecordScalarWhereInput | Prisma.RecordScalarWhereInput[]
+}
+
+export type RecordUncheckedUpdateManyWithoutAuthorNestedInput = {
+  create?: Prisma.XOR<Prisma.RecordCreateWithoutAuthorInput, Prisma.RecordUncheckedCreateWithoutAuthorInput> | Prisma.RecordCreateWithoutAuthorInput[] | Prisma.RecordUncheckedCreateWithoutAuthorInput[]
+  connectOrCreate?: Prisma.RecordCreateOrConnectWithoutAuthorInput | Prisma.RecordCreateOrConnectWithoutAuthorInput[]
+  upsert?: Prisma.RecordUpsertWithWhereUniqueWithoutAuthorInput | Prisma.RecordUpsertWithWhereUniqueWithoutAuthorInput[]
+  createMany?: Prisma.RecordCreateManyAuthorInputEnvelope
+  set?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  disconnect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  delete?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  connect?: Prisma.RecordWhereUniqueInput | Prisma.RecordWhereUniqueInput[]
+  update?: Prisma.RecordUpdateWithWhereUniqueWithoutAuthorInput | Prisma.RecordUpdateWithWhereUniqueWithoutAuthorInput[]
+  updateMany?: Prisma.RecordUpdateManyWithWhereWithoutAuthorInput | Prisma.RecordUpdateManyWithWhereWithoutAuthorInput[]
   deleteMany?: Prisma.RecordScalarWhereInput | Prisma.RecordScalarWhereInput[]
 }
 
@@ -737,6 +803,7 @@ export type RecordCreateWithoutSavedByInput = {
   updatedAt?: Date | string
   tracks?: Prisma.TrackCreateNestedManyWithoutRecordInput
   comments?: Prisma.CommentCreateNestedManyWithoutRecordInput
+  author: Prisma.UserCreateNestedOneWithoutUploadedRecordsInput
 }
 
 export type RecordUncheckedCreateWithoutSavedByInput = {
@@ -759,6 +826,7 @@ export type RecordUncheckedCreateWithoutSavedByInput = {
   spotifyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId: string
   tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutRecordInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutRecordInput
 }
@@ -766,6 +834,66 @@ export type RecordUncheckedCreateWithoutSavedByInput = {
 export type RecordCreateOrConnectWithoutSavedByInput = {
   where: Prisma.RecordWhereUniqueInput
   create: Prisma.XOR<Prisma.RecordCreateWithoutSavedByInput, Prisma.RecordUncheckedCreateWithoutSavedByInput>
+}
+
+export type RecordCreateWithoutAuthorInput = {
+  id: string
+  slug: string
+  title: string
+  artistName: string
+  year: string
+  metadataTagline: string
+  catalogNumber: string
+  category: string
+  phoneticOrCategory: string
+  etymology: string
+  description: string
+  albumCover: string
+  artistImage: string
+  tempo: string
+  key: string
+  loudness: string
+  spotifyId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tracks?: Prisma.TrackCreateNestedManyWithoutRecordInput
+  comments?: Prisma.CommentCreateNestedManyWithoutRecordInput
+  savedBy?: Prisma.UserCreateNestedManyWithoutSavedRecordsInput
+}
+
+export type RecordUncheckedCreateWithoutAuthorInput = {
+  id: string
+  slug: string
+  title: string
+  artistName: string
+  year: string
+  metadataTagline: string
+  catalogNumber: string
+  category: string
+  phoneticOrCategory: string
+  etymology: string
+  description: string
+  albumCover: string
+  artistImage: string
+  tempo: string
+  key: string
+  loudness: string
+  spotifyId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutRecordInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutRecordInput
+  savedBy?: Prisma.UserUncheckedCreateNestedManyWithoutSavedRecordsInput
+}
+
+export type RecordCreateOrConnectWithoutAuthorInput = {
+  where: Prisma.RecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecordCreateWithoutAuthorInput, Prisma.RecordUncheckedCreateWithoutAuthorInput>
+}
+
+export type RecordCreateManyAuthorInputEnvelope = {
+  data: Prisma.RecordCreateManyAuthorInput | Prisma.RecordCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type RecordUpsertWithWhereUniqueWithoutSavedByInput = {
@@ -807,6 +935,23 @@ export type RecordScalarWhereInput = {
   spotifyId?: Prisma.StringFilter<"Record"> | string
   createdAt?: Prisma.DateTimeFilter<"Record"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Record"> | Date | string
+  authorId?: Prisma.StringFilter<"Record"> | string
+}
+
+export type RecordUpsertWithWhereUniqueWithoutAuthorInput = {
+  where: Prisma.RecordWhereUniqueInput
+  update: Prisma.XOR<Prisma.RecordUpdateWithoutAuthorInput, Prisma.RecordUncheckedUpdateWithoutAuthorInput>
+  create: Prisma.XOR<Prisma.RecordCreateWithoutAuthorInput, Prisma.RecordUncheckedCreateWithoutAuthorInput>
+}
+
+export type RecordUpdateWithWhereUniqueWithoutAuthorInput = {
+  where: Prisma.RecordWhereUniqueInput
+  data: Prisma.XOR<Prisma.RecordUpdateWithoutAuthorInput, Prisma.RecordUncheckedUpdateWithoutAuthorInput>
+}
+
+export type RecordUpdateManyWithWhereWithoutAuthorInput = {
+  where: Prisma.RecordScalarWhereInput
+  data: Prisma.XOR<Prisma.RecordUpdateManyMutationInput, Prisma.RecordUncheckedUpdateManyWithoutAuthorInput>
 }
 
 export type RecordCreateWithoutTracksInput = {
@@ -831,6 +976,7 @@ export type RecordCreateWithoutTracksInput = {
   updatedAt?: Date | string
   comments?: Prisma.CommentCreateNestedManyWithoutRecordInput
   savedBy?: Prisma.UserCreateNestedManyWithoutSavedRecordsInput
+  author: Prisma.UserCreateNestedOneWithoutUploadedRecordsInput
 }
 
 export type RecordUncheckedCreateWithoutTracksInput = {
@@ -853,6 +999,7 @@ export type RecordUncheckedCreateWithoutTracksInput = {
   spotifyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutRecordInput
   savedBy?: Prisma.UserUncheckedCreateNestedManyWithoutSavedRecordsInput
 }
@@ -895,6 +1042,7 @@ export type RecordUpdateWithoutTracksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   comments?: Prisma.CommentUpdateManyWithoutRecordNestedInput
   savedBy?: Prisma.UserUpdateManyWithoutSavedRecordsNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutUploadedRecordsNestedInput
 }
 
 export type RecordUncheckedUpdateWithoutTracksInput = {
@@ -917,6 +1065,7 @@ export type RecordUncheckedUpdateWithoutTracksInput = {
   spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutRecordNestedInput
   savedBy?: Prisma.UserUncheckedUpdateManyWithoutSavedRecordsNestedInput
 }
@@ -943,6 +1092,7 @@ export type RecordCreateWithoutCommentsInput = {
   updatedAt?: Date | string
   tracks?: Prisma.TrackCreateNestedManyWithoutRecordInput
   savedBy?: Prisma.UserCreateNestedManyWithoutSavedRecordsInput
+  author: Prisma.UserCreateNestedOneWithoutUploadedRecordsInput
 }
 
 export type RecordUncheckedCreateWithoutCommentsInput = {
@@ -965,6 +1115,7 @@ export type RecordUncheckedCreateWithoutCommentsInput = {
   spotifyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  authorId: string
   tracks?: Prisma.TrackUncheckedCreateNestedManyWithoutRecordInput
   savedBy?: Prisma.UserUncheckedCreateNestedManyWithoutSavedRecordsInput
 }
@@ -1007,6 +1158,7 @@ export type RecordUpdateWithoutCommentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tracks?: Prisma.TrackUpdateManyWithoutRecordNestedInput
   savedBy?: Prisma.UserUpdateManyWithoutSavedRecordsNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutUploadedRecordsNestedInput
 }
 
 export type RecordUncheckedUpdateWithoutCommentsInput = {
@@ -1029,8 +1181,31 @@ export type RecordUncheckedUpdateWithoutCommentsInput = {
   spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
   tracks?: Prisma.TrackUncheckedUpdateManyWithoutRecordNestedInput
   savedBy?: Prisma.UserUncheckedUpdateManyWithoutSavedRecordsNestedInput
+}
+
+export type RecordCreateManyAuthorInput = {
+  id: string
+  slug: string
+  title: string
+  artistName: string
+  year: string
+  metadataTagline: string
+  catalogNumber: string
+  category: string
+  phoneticOrCategory: string
+  etymology: string
+  description: string
+  albumCover: string
+  artistImage: string
+  tempo: string
+  key: string
+  loudness: string
+  spotifyId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type RecordUpdateWithoutSavedByInput = {
@@ -1055,6 +1230,7 @@ export type RecordUpdateWithoutSavedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tracks?: Prisma.TrackUpdateManyWithoutRecordNestedInput
   comments?: Prisma.CommentUpdateManyWithoutRecordNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutUploadedRecordsNestedInput
 }
 
 export type RecordUncheckedUpdateWithoutSavedByInput = {
@@ -1077,11 +1253,85 @@ export type RecordUncheckedUpdateWithoutSavedByInput = {
   spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
   tracks?: Prisma.TrackUncheckedUpdateManyWithoutRecordNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutRecordNestedInput
 }
 
 export type RecordUncheckedUpdateManyWithoutSavedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.StringFieldUpdateOperationsInput | string
+  metadataTagline?: Prisma.StringFieldUpdateOperationsInput | string
+  catalogNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneticOrCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  etymology?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  albumCover?: Prisma.StringFieldUpdateOperationsInput | string
+  artistImage?: Prisma.StringFieldUpdateOperationsInput | string
+  tempo?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  loudness?: Prisma.StringFieldUpdateOperationsInput | string
+  spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type RecordUpdateWithoutAuthorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.StringFieldUpdateOperationsInput | string
+  metadataTagline?: Prisma.StringFieldUpdateOperationsInput | string
+  catalogNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneticOrCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  etymology?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  albumCover?: Prisma.StringFieldUpdateOperationsInput | string
+  artistImage?: Prisma.StringFieldUpdateOperationsInput | string
+  tempo?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  loudness?: Prisma.StringFieldUpdateOperationsInput | string
+  spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tracks?: Prisma.TrackUpdateManyWithoutRecordNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutRecordNestedInput
+  savedBy?: Prisma.UserUpdateManyWithoutSavedRecordsNestedInput
+}
+
+export type RecordUncheckedUpdateWithoutAuthorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  artistName?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.StringFieldUpdateOperationsInput | string
+  metadataTagline?: Prisma.StringFieldUpdateOperationsInput | string
+  catalogNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneticOrCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  etymology?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  albumCover?: Prisma.StringFieldUpdateOperationsInput | string
+  artistImage?: Prisma.StringFieldUpdateOperationsInput | string
+  tempo?: Prisma.StringFieldUpdateOperationsInput | string
+  key?: Prisma.StringFieldUpdateOperationsInput | string
+  loudness?: Prisma.StringFieldUpdateOperationsInput | string
+  spotifyId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tracks?: Prisma.TrackUncheckedUpdateManyWithoutRecordNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutRecordNestedInput
+  savedBy?: Prisma.UserUncheckedUpdateManyWithoutSavedRecordsNestedInput
+}
+
+export type RecordUncheckedUpdateManyWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1172,9 +1422,11 @@ export type RecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   spotifyId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
   tracks?: boolean | Prisma.Record$tracksArgs<ExtArgs>
   comments?: boolean | Prisma.Record$commentsArgs<ExtArgs>
   savedBy?: boolean | Prisma.Record$savedByArgs<ExtArgs>
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.RecordCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["record"]>
 
@@ -1198,6 +1450,8 @@ export type RecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   spotifyId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["record"]>
 
 export type RecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1220,6 +1474,8 @@ export type RecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   spotifyId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["record"]>
 
 export type RecordSelectScalar = {
@@ -1242,17 +1498,23 @@ export type RecordSelectScalar = {
   spotifyId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  authorId?: boolean
 }
 
-export type RecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "artistName" | "year" | "metadataTagline" | "catalogNumber" | "category" | "phoneticOrCategory" | "etymology" | "description" | "albumCover" | "artistImage" | "tempo" | "key" | "loudness" | "spotifyId" | "createdAt" | "updatedAt", ExtArgs["result"]["record"]>
+export type RecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "artistName" | "year" | "metadataTagline" | "catalogNumber" | "category" | "phoneticOrCategory" | "etymology" | "description" | "albumCover" | "artistImage" | "tempo" | "key" | "loudness" | "spotifyId" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["record"]>
 export type RecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tracks?: boolean | Prisma.Record$tracksArgs<ExtArgs>
   comments?: boolean | Prisma.Record$commentsArgs<ExtArgs>
   savedBy?: boolean | Prisma.Record$savedByArgs<ExtArgs>
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.RecordCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type RecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type RecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type RecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type RecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $RecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Record"
@@ -1260,6 +1522,7 @@ export type $RecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     tracks: Prisma.$TrackPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
     savedBy: Prisma.$UserPayload<ExtArgs>[]
+    author: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1281,6 +1544,7 @@ export type $RecordPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     spotifyId: string
     createdAt: Date
     updatedAt: Date
+    authorId: string
   }, ExtArgs["result"]["record"]>
   composites: {}
 }
@@ -1678,6 +1942,7 @@ export interface Prisma__RecordClient<T, Null = never, ExtArgs extends runtime.T
   tracks<T extends Prisma.Record$tracksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Record$tracksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.Record$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Record$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedBy<T extends Prisma.Record$savedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Record$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1726,6 +1991,7 @@ export interface RecordFieldRefs {
   readonly spotifyId: Prisma.FieldRef<"Record", 'String'>
   readonly createdAt: Prisma.FieldRef<"Record", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Record", 'DateTime'>
+  readonly authorId: Prisma.FieldRef<"Record", 'String'>
 }
     
 
@@ -1975,6 +2241,10 @@ export type RecordCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.RecordCreateManyInput | Prisma.RecordCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecordIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2045,6 +2315,10 @@ export type RecordUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Records to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecordIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

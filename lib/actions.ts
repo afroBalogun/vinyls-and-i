@@ -1,22 +1,26 @@
 "use server";
 
+import { getCurrentUser } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function createRecord(formData: FormData) {
+
+
+export async function createRecord(userId: string, formData: FormData) {
+    const currentUser = await getCurrentUser();
+    const currentUserId = currentUser?.id
+
     const title = formData.get("title") as string;
     const slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
 
     const trackListRaw = formData.get("trackListJson") as string;
     const parsedTracks = JSON.parse(trackListRaw || "[]");
 
-    // Map the Spotify tracks and merge them with the "story" textareas from the form
     const tracksWithStories = parsedTracks.map((track: any, index: number) => ({
         number: track.number.toString(),
         title: track.title,
         duration: track.duration,
-        // Match the 'name' attribute from your form: name={`track_story_${index}`}
         story: (formData.get(`track_story_${index}`) as string) || ""
     }));
 
@@ -25,7 +29,7 @@ export async function createRecord(formData: FormData) {
 
     await prisma.record.create({
         data: {
-            id: slug, 
+            id: slug,
             slug: slug,
             title: title,
             artistName: formData.get("artistName") as string,
@@ -42,6 +46,9 @@ export async function createRecord(formData: FormData) {
             artistImage: formData.get("artistImage") as string || "/placeholder-artist.jpeg",
             loudness: formData.get("loudness") as string || "-0.0 dB",
             spotifyId: formData.get("spotifyId") as string || "none",
+            author: {
+                connect: { id: userId }
+            },
             tracks: {
                 create: tracksWithStories
             }
@@ -49,19 +56,31 @@ export async function createRecord(formData: FormData) {
     });
 
     revalidatePath("/records");
-    revalidatePath("/admin");
+    revalidatePath(`/profile/${currentUserId}/records`);
 
-    redirect("/admin");
+    redirect(`/profile/${currentUserId}/records`);
 }
 
 export async function deleteRecord(id: string) {
+    const currentUser = await getCurrentUser();
+    const currentUserId = currentUser?.id
+
     await prisma.record.delete({ where: { id } });
-    revalidatePath("/admin");
+    revalidatePath(`/profile/${currentUserId}/records`);
     revalidatePath("/records");
 }
 
 export async function updateRecord(formData: FormData) {
+    const currentUser = await getCurrentUser();
+    const currentUserId = currentUser?.id
+
     const id = formData.get("id") as string;
+
+    const existing = await prisma.record.findFirst({
+        where: { id, authorId: currentUserId }
+    });
+
+    if (!existing) throw new Error("Unauthorized Attempt");
 
     await prisma.record.update({
         where: { id },
@@ -87,9 +106,9 @@ export async function updateRecord(formData: FormData) {
         }
     });
 
-    revalidatePath("/admin");
+    revalidatePath(`/profile/${currentUserId}/records`);
     revalidatePath(`/records/${id}`);
-    redirect("/admin");
+    revalidatePath(`/profile/${currentUserId}/records`);
 }
 
 export async function getNextCatalogNumber() {
@@ -110,7 +129,6 @@ export async function addComment(recordId: string, userId: string, formData: For
     await prisma.comment.create({
         data: {
             text: text,
-            // Use 'connect' instead of passing the string directly to 'user'
             user: {
                 connect: { id: userId }
             },
@@ -127,11 +145,42 @@ export async function toggleSaveRecord(recordId: string, userId: string, isCurre
     await prisma.user.update({
         where: { id: userId },
         data: {
-            savedRecords: isCurrentlySaved 
-                ? { disconnect: { id: recordId } } 
+            savedRecords: isCurrentlySaved
+                ? { disconnect: { id: recordId } }
                 : { connect: { id: recordId } }
         }
     });
-    
+
     revalidatePath(`/records/${recordId}`);
+}
+
+export async function updateUserDetails(formData: FormData) {
+    const currentUser = await getCurrentUser();
+    const userId = formData.get("userId") as string;
+
+    if (!currentUser || currentUser.id !== userId) {
+        throw new Error("UNAUTHORIZED_TRANSMISSION_PROTOCOL_BREACH");
+    }
+
+    const name = formData.get("name") as string;
+    const bio = formData.get("description") as string;
+    const image = formData.get("image") as string;
+
+    await prisma.user.update({
+        where: { id: userId },
+        data: {
+            name: name,
+            bio: bio,
+            image: image
+        }
+    });
+
+    revalidatePath(`/profile/${userId}`);
+    revalidatePath(`/community-feed`); 
+    
+    redirect(`/profile`);
+}
+
+export async function handleSignOutRevalidation() {
+    revalidatePath("/");
 }

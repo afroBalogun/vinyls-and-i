@@ -31,7 +31,7 @@ export default function SpotifySearch({ onResult, onLoading }: { onResult: (data
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                 />
-                <button type="button" onClick={handleSearch} className="bg-zinc-900 text-white px-6 text-[10px] font-mono">SEARCH</button>
+                <button type="button" onClick={handleSearch} className="bg-secondary text-white px-6 text-[10px] font-mono">SEARCH</button>
             </div>
 
             {options.length > 0 && (

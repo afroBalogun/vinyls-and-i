@@ -1,6 +1,13 @@
-import React, { useMemo } from 'react';
+"use client"
+import Image from 'next/image';
+import React, { useState, useEffect, useMemo } from 'react';
+import { LoadingScreen } from './LoadingScreen';
 
-// Memoizing the SVG prevents it from being recalculated on every resize/parent render
+
+/**
+ * VINYL DISK COMPONENT
+ * Heavy SVG logic isolated and memoized.
+ */
 const VinylDisk = React.memo(() => {
     const terms = "ANALOG • GROOVE • VINYL • RHYTHM • SONIC • ARCHIVE • PRESSING • ";
     const innerCount = 10;
@@ -10,7 +17,6 @@ const VinylDisk = React.memo(() => {
     const innerStartRadius = centerHole + 20;
     const outerStartRadius = innerStartRadius + (innerCount * stepSize) + 10;
 
-    // Pre-calculate paths once
     const paths = useMemo(() => {
         return [...Array(innerCount + outerCount)].map((_, i) => {
             const radius = i < innerCount
@@ -21,7 +27,7 @@ const VinylDisk = React.memo(() => {
                 d: `M 400, 400 m -${radius}, 0 a ${radius},${radius} 0 1,1 ${radius * 2},0 a ${radius},${radius} 0 1,1 -${radius * 2},0`
             };
         });
-    }, []);
+    }, [innerCount, outerCount, innerStartRadius, outerStartRadius, stepSize]);
 
     return (
         <svg
@@ -34,19 +40,17 @@ const VinylDisk = React.memo(() => {
                 ))}
             </defs>
 
-            {/* Inner Rings */}
             {paths.slice(0, innerCount).map((p, i) => (
                 <text key={`inner-${i}`} className="fill-zinc-400 text-[6px] uppercase font-medium tracking-tighter opacity-60">
-                    <textPath xlinkHref={`#${p.id}`} startOffset={i * 10}>
+                    <textPath href={`#${p.id}`} startOffset={i * 10}>
                         {terms.repeat(10)}
                     </textPath>
                 </text>
             ))}
 
-            {/* Outer Rings */}
             {paths.slice(innerCount).map((p, i) => (
                 <text key={`outer-${i}`} className="fill-zinc-900 text-[7px] uppercase font-bold tracking-widest">
-                    <textPath xlinkHref={`#${p.id}`} startOffset={i * 5}>
+                    <textPath href={`#${p.id}`} startOffset={i * 5}>
                         {terms.repeat(15)}
                     </textPath>
                 </text>
@@ -59,28 +63,68 @@ const VinylDisk = React.memo(() => {
 
 VinylDisk.displayName = "VinylDisk";
 
+/**
+ * MAIN HERO COMPONENT
+ */
 export default function VinylHero() {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+    useEffect(() => {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+        const handleResize = () => {
+            setIsLoaded(false);
+            setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+        };
+
+        let resizeTimer: NodeJS.Timeout;
+        const debouncedResize = () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(handleResize, 150);
+        };
+
+        window.addEventListener('resize', debouncedResize);
+        return () => window.removeEventListener('resize', debouncedResize);
+    }, []);
+
     return (
-        <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-[#fafafa]">
-            <HeroMetadata />
+        <>
+            <LoadingScreen
+                isFinished={isLoaded} 
+                onComplete={() => setIsLoaded(true)} 
+            />
 
-            {/* Container with fixed aspect ratio to prevent layout thrashing */}
-            <div className="relative w-[80vw] h-[80vw] max-w-[600px] max-h-[600px] md:max-w-[750px] md:max-h-[750px]">
-                <VinylDisk />
-            </div>
+            <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-primary">
+                <HeroMetadata />
 
-            <div className="absolute bottom-12 text-center">
-                <h1 className="text-sm tracking-[0.5em] text-zinc-500 uppercase">
-                    Vinyls <span className="italic font-serif">&</span> I
-                </h1>
-            </div>
-        </section>
+                {/* The Vinyl Disk as an Optimized Image */}
+                <div className={`relative w-[85vw] h-[45vw] max-w-162.5 md:max-w-200 transition-all duration-1000 ease-out ${
+                    isLoaded ? "opacity-100 scale-100 rotate-0 blur-0" : "opacity-0 scale-95 rotate-12 blur-sm"
+                }`}>
+                    <div className="relative w-full h-full animate-spin-">
+                        <Image
+                            src="/vinyl.png"
+                            alt="Vinyl Record Archive"
+                            fill
+                            priority
+                            className="object-contain"
+                        />
+                    </div>
+                </div>
+
+                <div className={`absolute bottom-12 text-center transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+                    <h1 className="text-sm tracking-[0.5em] text-zinc-500 uppercase">
+                        Vinyls <span className="italic font-serif">&</span> I
+                    </h1>
+                </div>
+            </section>
+        </>
     );
 }
 
 export function HeroMetadata() {
     return (
-        <div className="absolute inset-0 px-5 md:px-10 py-20 pointer-events-none flex flex-col justify-between uppercase font-mono text-[8px] tracking-[0.2em] text-zinc-">
+        <div className="absolute inset-0 px-5 md:px-10 py-20 pointer-events-none flex flex-col justify-between uppercase font-mono text-[8px] tracking-[0.2em] text-zinc-500">
             <div className="flex justify-between items-start">
                 <div className="space-y-1">
                     <p>Vinyls & I</p>

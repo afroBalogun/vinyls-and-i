@@ -3,7 +3,12 @@ import prisma from "@/lib/db";
 
 export default async function RecordsPage() {
     const records = await prisma.record.findMany({
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
+        where: {
+            author: {
+                role: 'ADMIN'
+            }
+        },
     });
     return (
         <main className="min-h-screen flex flex-col items-center justify-center py-20 px-5 md:px-10">

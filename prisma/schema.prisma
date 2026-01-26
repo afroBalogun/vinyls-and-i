@@ -42,6 +42,7 @@ model User {
   observations Comment[]
   savedRecords Record[]  @relation("UserSavedRecords")
   posts        Post[]
+  uploadedRecords Record[] @relation("UserUploadedRecords")
 
   @@map("user")
 }
@@ -117,6 +118,8 @@ model Record {
   savedBy  User[]    @relation("UserSavedRecords")
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  authorId  String
+  author    User     @relation("UserUploadedRecords", fields: [authorId], references: [id], onDelete: Cascade)
 }
 
 model Track {

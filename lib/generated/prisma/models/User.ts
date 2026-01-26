@@ -227,6 +227,7 @@ export type UserWhereInput = {
   observations?: Prisma.CommentListRelationFilter
   savedRecords?: Prisma.RecordListRelationFilter
   posts?: Prisma.PostListRelationFilter
+  uploadedRecords?: Prisma.RecordListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -245,6 +246,7 @@ export type UserOrderByWithRelationInput = {
   observations?: Prisma.CommentOrderByRelationAggregateInput
   savedRecords?: Prisma.RecordOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
+  uploadedRecords?: Prisma.RecordOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -266,6 +268,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   observations?: Prisma.CommentListRelationFilter
   savedRecords?: Prisma.RecordListRelationFilter
   posts?: Prisma.PostListRelationFilter
+  uploadedRecords?: Prisma.RecordListRelationFilter
 }, "id" | "email" | "archiveId">
 
 export type UserOrderByWithAggregationInput = {
@@ -316,6 +319,7 @@ export type UserCreateInput = {
   observations?: Prisma.CommentCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -334,6 +338,7 @@ export type UserUncheckedCreateInput = {
   observations?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUpdateInput = {
@@ -352,6 +357,7 @@ export type UserUpdateInput = {
   observations?: Prisma.CommentUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -370,6 +376,7 @@ export type UserUncheckedUpdateInput = {
   observations?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUncheckedUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -521,6 +528,12 @@ export type UserCreateNestedManyWithoutSavedRecordsInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
+export type UserCreateNestedOneWithoutUploadedRecordsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUploadedRecordsInput, Prisma.UserUncheckedCreateWithoutUploadedRecordsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUploadedRecordsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserUncheckedCreateNestedManyWithoutSavedRecordsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSavedRecordsInput, Prisma.UserUncheckedCreateWithoutSavedRecordsInput> | Prisma.UserCreateWithoutSavedRecordsInput[] | Prisma.UserUncheckedCreateWithoutSavedRecordsInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSavedRecordsInput | Prisma.UserCreateOrConnectWithoutSavedRecordsInput[]
@@ -538,6 +551,14 @@ export type UserUpdateManyWithoutSavedRecordsNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutSavedRecordsInput | Prisma.UserUpdateWithWhereUniqueWithoutSavedRecordsInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutSavedRecordsInput | Prisma.UserUpdateManyWithWhereWithoutSavedRecordsInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUpdateOneRequiredWithoutUploadedRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUploadedRecordsInput, Prisma.UserUncheckedCreateWithoutUploadedRecordsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUploadedRecordsInput
+  upsert?: Prisma.UserUpsertWithoutUploadedRecordsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUploadedRecordsInput, Prisma.UserUpdateWithoutUploadedRecordsInput>, Prisma.UserUncheckedUpdateWithoutUploadedRecordsInput>
 }
 
 export type UserUncheckedUpdateManyWithoutSavedRecordsNestedInput = {
@@ -582,6 +603,7 @@ export type UserCreateWithoutPostsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   observations?: Prisma.CommentCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordCreateNestedManyWithoutSavedByInput
+  uploadedRecords?: Prisma.RecordCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -599,6 +621,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   observations?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutSavedByInput
+  uploadedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -632,6 +655,7 @@ export type UserUpdateWithoutPostsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   observations?: Prisma.CommentUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUpdateManyWithoutSavedByNestedInput
+  uploadedRecords?: Prisma.RecordUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -649,6 +673,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   observations?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUncheckedUpdateManyWithoutSavedByNestedInput
+  uploadedRecords?: Prisma.RecordUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -666,6 +691,7 @@ export type UserCreateWithoutSessionsInput = {
   observations?: Prisma.CommentCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -683,6 +709,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   observations?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -716,6 +743,7 @@ export type UserUpdateWithoutSessionsInput = {
   observations?: Prisma.CommentUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -733,6 +761,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   observations?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUncheckedUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -750,6 +779,7 @@ export type UserCreateWithoutAccountsInput = {
   observations?: Prisma.CommentCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -767,6 +797,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   observations?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -800,6 +831,7 @@ export type UserUpdateWithoutAccountsInput = {
   observations?: Prisma.CommentUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -817,6 +849,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   observations?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUncheckedUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutSavedRecordsInput = {
@@ -834,6 +867,7 @@ export type UserCreateWithoutSavedRecordsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   observations?: Prisma.CommentCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutSavedRecordsInput = {
@@ -851,11 +885,53 @@ export type UserUncheckedCreateWithoutSavedRecordsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   observations?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutSavedRecordsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutSavedRecordsInput, Prisma.UserUncheckedCreateWithoutSavedRecordsInput>
+}
+
+export type UserCreateWithoutUploadedRecordsInput = {
+  id?: string
+  role?: $Enums.Role
+  email: string
+  name?: string | null
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bio?: string | null
+  archiveId?: string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  observations?: Prisma.CommentCreateNestedManyWithoutUserInput
+  savedRecords?: Prisma.RecordCreateNestedManyWithoutSavedByInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutUploadedRecordsInput = {
+  id?: string
+  role?: $Enums.Role
+  email: string
+  name?: string | null
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bio?: string | null
+  archiveId?: string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  observations?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  savedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutSavedByInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutUploadedRecordsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUploadedRecordsInput, Prisma.UserUncheckedCreateWithoutUploadedRecordsInput>
 }
 
 export type UserUpsertWithWhereUniqueWithoutSavedRecordsInput = {
@@ -890,6 +966,53 @@ export type UserScalarWhereInput = {
   archiveId?: Prisma.StringFilter<"User"> | string
 }
 
+export type UserUpsertWithoutUploadedRecordsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUploadedRecordsInput, Prisma.UserUncheckedUpdateWithoutUploadedRecordsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUploadedRecordsInput, Prisma.UserUncheckedCreateWithoutUploadedRecordsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUploadedRecordsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUploadedRecordsInput, Prisma.UserUncheckedUpdateWithoutUploadedRecordsInput>
+}
+
+export type UserUpdateWithoutUploadedRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archiveId?: Prisma.StringFieldUpdateOperationsInput | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  observations?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  savedRecords?: Prisma.RecordUpdateManyWithoutSavedByNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUploadedRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archiveId?: Prisma.StringFieldUpdateOperationsInput | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  observations?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  savedRecords?: Prisma.RecordUncheckedUpdateManyWithoutSavedByNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
 export type UserCreateWithoutObservationsInput = {
   id?: string
   role?: $Enums.Role
@@ -905,6 +1028,7 @@ export type UserCreateWithoutObservationsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutObservationsInput = {
@@ -922,6 +1046,7 @@ export type UserUncheckedCreateWithoutObservationsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   savedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutSavedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  uploadedRecords?: Prisma.RecordUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutObservationsInput = {
@@ -955,6 +1080,7 @@ export type UserUpdateWithoutObservationsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutObservationsInput = {
@@ -972,6 +1098,7 @@ export type UserUncheckedUpdateWithoutObservationsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   savedRecords?: Prisma.RecordUncheckedUpdateManyWithoutSavedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUpdateWithoutSavedRecordsInput = {
@@ -989,6 +1116,7 @@ export type UserUpdateWithoutSavedRecordsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   observations?: Prisma.CommentUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavedRecordsInput = {
@@ -1006,6 +1134,7 @@ export type UserUncheckedUpdateWithoutSavedRecordsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   observations?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  uploadedRecords?: Prisma.RecordUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutSavedRecordsInput = {
@@ -1032,6 +1161,7 @@ export type UserCountOutputType = {
   observations: number
   savedRecords: number
   posts: number
+  uploadedRecords: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1040,6 +1170,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   observations?: boolean | UserCountOutputTypeCountObservationsArgs
   savedRecords?: boolean | UserCountOutputTypeCountSavedRecordsArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
+  uploadedRecords?: boolean | UserCountOutputTypeCountUploadedRecordsArgs
 }
 
 /**
@@ -1087,6 +1218,13 @@ export type UserCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Exte
   where?: Prisma.PostWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUploadedRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecordWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1104,6 +1242,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   observations?: boolean | Prisma.User$observationsArgs<ExtArgs>
   savedRecords?: boolean | Prisma.User$savedRecordsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
+  uploadedRecords?: boolean | Prisma.User$uploadedRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1153,6 +1292,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   observations?: boolean | Prisma.User$observationsArgs<ExtArgs>
   savedRecords?: boolean | Prisma.User$savedRecordsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
+  uploadedRecords?: boolean | Prisma.User$uploadedRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1166,6 +1306,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     observations: Prisma.$CommentPayload<ExtArgs>[]
     savedRecords: Prisma.$RecordPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
+    uploadedRecords: Prisma.$RecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1577,6 +1718,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   observations<T extends Prisma.User$observationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$observationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedRecords<T extends Prisma.User$savedRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  uploadedRecords<T extends Prisma.User$uploadedRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2121,6 +2263,30 @@ export type User$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[]
+}
+
+/**
+ * User.uploadedRecords
+ */
+export type User$uploadedRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Record
+   */
+  select?: Prisma.RecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Record
+   */
+  omit?: Prisma.RecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecordInclude<ExtArgs> | null
+  where?: Prisma.RecordWhereInput
+  orderBy?: Prisma.RecordOrderByWithRelationInput | Prisma.RecordOrderByWithRelationInput[]
+  cursor?: Prisma.RecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecordScalarFieldEnum | Prisma.RecordScalarFieldEnum[]
 }
 
 /**

@@ -3,15 +3,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { addComment } from '@/lib/actions';
 import { useSession } from '@/lib/auth-client';
+import { useCurrentUser } from '@/auth-provider';
 
 interface CommentProps {
     recordId: string;
-    initialComments: any[]; // These now include the user object
+    initialComments: any[]; 
 }
 
 export default function RecordComments({ recordId, initialComments }: CommentProps) {
     const formRef = useRef<HTMLFormElement>(null);
-    const { data: session } = useSession();
+    const currentUser = useCurrentUser();
 
     const [mounted, setMounted] = useState<boolean>(false);
 
@@ -19,13 +20,12 @@ export default function RecordComments({ recordId, initialComments }: CommentPro
         setMounted(true);
     }, []);
     
-    // Fallbacks for the current logged-in user
-    const userId = session?.user?.id;
-    const userName = session?.user?.name || "GUEST";
+    const userId = currentUser?.id;
+    const userName = currentUser?.name || "GUEST";
     console.log(initialComments)
 
 
-    if (!mounted) return <div className="md:col-span-4 min-h-[200px]" />;
+    if (!mounted) return <div className="md:col-span-4 min-h-50" />;
 
     return (
         <section className="max-w-7xl mx-auto mt-32 px-6 pb-20 border-t border-zinc-100 pt-20">
