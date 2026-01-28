@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 
-
+// New Record
 export async function createRecord(userId: string, formData: FormData) {
     const currentUser = await getCurrentUser();
     const currentUserId = currentUser?.id
@@ -61,6 +61,7 @@ export async function createRecord(userId: string, formData: FormData) {
     redirect(`/profile/${currentUserId}/records`);
 }
 
+// Delete Record
 export async function deleteRecord(id: string) {
     const currentUser = await getCurrentUser();
     const currentUserId = currentUser?.id
@@ -70,6 +71,7 @@ export async function deleteRecord(id: string) {
     revalidatePath("/records");
 }
 
+// Edit Record
 export async function updateRecord(formData: FormData) {
     const currentUser = await getCurrentUser();
     const currentUserId = currentUser?.id
@@ -111,6 +113,7 @@ export async function updateRecord(formData: FormData) {
     revalidatePath(`/profile/${currentUserId}/records`);
 }
 
+
 export async function getNextCatalogNumber() {
     const lastRecord = await prisma.record.findFirst({
         orderBy: { createdAt: 'desc' },
@@ -123,6 +126,7 @@ export async function getNextCatalogNumber() {
     return `VI-${lastNum + 1}`;
 }
 
+// Post a Comment
 export async function addComment(recordId: string, userId: string, formData: FormData) {
     const text = formData.get("text") as string;
 
@@ -141,6 +145,7 @@ export async function addComment(recordId: string, userId: string, formData: For
     revalidatePath(`/records/${recordId}`);
 }
 
+// Bookmark record
 export async function toggleSaveRecord(recordId: string, userId: string, isCurrentlySaved: boolean) {
     await prisma.user.update({
         where: { id: userId },
@@ -154,6 +159,7 @@ export async function toggleSaveRecord(recordId: string, userId: string, isCurre
     revalidatePath(`/records/${recordId}`);
 }
 
+// Update user details
 export async function updateUserDetails(formData: FormData) {
     const currentUser = await getCurrentUser();
     const userId = formData.get("userId") as string;
@@ -181,6 +187,7 @@ export async function updateUserDetails(formData: FormData) {
     redirect(`/profile`);
 }
 
+// sign out revalidation
 export async function handleSignOutRevalidation() {
     revalidatePath("/");
 }

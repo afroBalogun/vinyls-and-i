@@ -16,7 +16,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </div>
             </nav>
             
-            {/* Ensure content doesn't get hidden under the main navbar if they are used together */}
             <main className="w-full">
                 {children}
             </main>

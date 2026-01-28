@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
@@ -27,15 +29,15 @@ export default function Footer() {
                 <div className="grid grid-cols-2 gap-4 text-[11px] uppercase tracking-widest">
                     <div className="flex flex-col gap-3">
                         <h3 className="opacity-40 mb-2 font-bold">Directories</h3>
-                        <a href="/featured" className="hover:text-secondary transition-colors">Featured</a>
-                        <a href="/archive" className="hover:text-secondary transition-colors">Repository</a>
-                        <a href="/community" className="hover:text-secondary transition-colors">Collective</a>
+                        <Link href="#featured" className="hover:text-secondary transition-colors">Featured</Link>
+                        <Link href="/records" className="hover:text-secondary transition-colors">Records</Link>
+                        <Link href="/community-feed" className="hover:text-secondary transition-colors">Community</Link>
                     </div>
                     <div className="flex flex-col gap-3">
                         <h3 className="opacity-40 mb-2 font-bold">External</h3>
-                        <a href="#" className="hover:text-secondary transition-colors">Spotify_API</a>
-                        <a href="#" className="hover:text-secondary transition-colors">GitHub_Src</a>
-                        <a href="#" className="hover:text-secondary transition-colors">Documentation</a>
+                        <Link href="https://developer.spotify.com/documentation/web-api" className="hover:text-secondary transition-colors">Spotify_API</Link>
+                        <Link href="https://github.com/afroBalogun/vinyls-and-i" className="hover:text-secondary transition-colors">GitHub_Src</Link>
+                        <Link href="#" className="hover:text-secondary transition-colors">Documentation</Link>
                     </div>
                 </div>
 
@@ -47,7 +49,7 @@ export default function Footer() {
                     <textarea
                         name="description"
                         rows={4}
-                        className="border border-zinc-200 p-3 text-sm focus:border-zinc-900 outline-none bg-transparent w-full text-secondary"
+                        className="border border-zinc-200 p-3 text-sm focus:border-secondary outline-none bg-transparent w-full text-secondary"
                         placeholder="Input final archival notes..."
                     />
                     <button className="mt-2 text-[10px] border border-secondary py-2 px-4 hover:bg-secondary hover:text-white transition-all uppercase font-bold self-start">
