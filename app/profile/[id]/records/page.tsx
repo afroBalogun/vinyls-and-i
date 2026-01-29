@@ -35,7 +35,7 @@ export default async function PublicProfileArchive({
     const totalPages = Math.ceil(totalRecords / itemsPerPage);
 
     return (
-        <main className="p-5 max-w-7xl mx-auto font-sans py-20 text-secondary">
+        <main className="p-5 max-w-7xl mx-auto font-sans py-20 px-5 md:px-20 text-secondary">
             {/* Header: Minimalist & Archival */}
             <header className="flex max-md:flex-col justify-between gap-5 items-baseline border-b border-zinc-200 pb-8 mb-12">
                 <div>

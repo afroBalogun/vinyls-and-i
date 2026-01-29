@@ -36,10 +36,10 @@ export default async function Dashboard({
     const totalPages = Math.ceil(totalRecords / itemsPerPage);
 
     return (
-        <main className="p-8 max-w-7xl mx-auto font-sans text-secondary">
+        <main className="px-5 py-20 max-w-7xl mx-auto font-sans text-secondary">
             <header className="flex justify-between items-end border-b pb-6 mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tighter uppercase">Archive Management</h1>
+                    <h1 className="text-xl md:text-3xl font-bold tracking-tighter uppercase">Archive Management</h1>
                     <p className="text-xs font-mono text-zinc-500 uppercase">Authorized Personnel: {currentUser?.name}</p>
                 </div>
                 <Link href={`/dashboard/records/new`} className="bg-secondary text-white px-4 py-2 text-xs font-mono uppercase">

@@ -24,7 +24,7 @@ export default async function EditProfilePage({ params }: { params: Promise<{ id
     if (!user) notFound();
 
     return (
-        <main className="max-w-7xl mx-auto py-24 px-8">
+        <main className="max-w-7xl mx-auto py-20 px-5 md:px-20">
             <header className="mb-12 border-b border-zinc-200 pb-8">
                 <h1 className="text-3xl font-bold uppercase tracking-tighter font-serif italic">
                     Edit_User_Manifest

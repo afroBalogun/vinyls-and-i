@@ -24,7 +24,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
     const isOwner = currentUser?.id === user.id;
 
     return (
-        <main className="min-h-screen bg-primary text-secondary font-sans selection:bg-zinc-200 p-5 py-24 overflow-x-hidden">
+        <main className="min-h-screen bg-primary text-secondary font-sans selection:bg-zinc-200 py-20 px-5 md:px-20 overflow-x-hidden">
             {/* HEADER: Archive Identity */}
             <header className="max-w-7xl mx-auto mb-24 flex flex-col md:flex-row justify-between md:items-end gap-8 border-b border-secondary pb-12">
                 <div className="space-y-2">

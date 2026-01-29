@@ -67,7 +67,7 @@ export default function NewRecordPage() {
     const createRecordWithId = createRecord.bind(null, currentUser?.id as string);
 
     return (
-        <main className="max-w-7xl mx-auto p-8 font-sans text-secondary">
+        <main className="max-w-7xl mx-auto py-20 px-5 md:px-20 font-sans text-secondary">
             <header className="mb-8">
                 <h1 className="text-2xl font-bold uppercase tracking-tighter">New_Archive_Entry</h1>
                 <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest mt-1">

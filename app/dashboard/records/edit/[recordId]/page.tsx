@@ -21,7 +21,7 @@ export default async function EditRecordPage({ params }: { params: Promise<{ id:
     }
 
     return (
-        <main className="max-w-7xl mx-auto p-8 font-sans text-secondary">
+        <main className="max-w-7xl mx-auto py-20 px-5 md:px-20font-sans text-secondary">
             <h1 className="text-2xl font-bold uppercase tracking-tighter mb-12 border-b pb-4">
                 Update_Archive_Entry: {record.catalogNumber}
             </h1>

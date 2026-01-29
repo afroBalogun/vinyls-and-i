@@ -43,7 +43,7 @@ export default function FeedClient({ initialRecords, currentPage, totalPages }: 
     };
 
     return (
-        <main ref={container} className="w-full py-24 px-5 md:px-20 font-mono text-secondary min-h-screen max-w-7xl mx-auto">
+        <main ref={container} className="w-full py-20 px-5 md:px-20 font-mono text-secondary min-h-screen max-w-7xl mx-auto">
             <header className="feed-header mb-12 border-b border-secondary/20 pb-6 flex justify-between items-end">
                 <div>
                     <h1 className="text-3xl font-bold uppercase tracking-tighter">Community_Feed</h1>

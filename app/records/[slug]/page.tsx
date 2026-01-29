@@ -41,7 +41,7 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
 
     return (
         <RecordPageClient>
-            <main className="min-h-screen bg-primary text-secondary font-sans selection:bg-zinc-200 px-5 md:px-10 overflow-x-hidden py-24">
+            <main className="min-h-screen bg-primary text-secondary font-sans selection:bg-zinc-200 py-20 px-5 md:px-20 overflow-x-hidden ">
 
                 {/* 1. TOP HEADER SECTION */}
                 <header className="flex justify-between items-start mb-12 relative z-50">
