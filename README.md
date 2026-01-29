@@ -48,3 +48,7 @@ I'm a sucker for good music, and a content writer. The original idea for Vinyls 
    ```bash
    npm run dev
    ```
+
+
+
+<img width="1919" height="911" alt="image" src="https://github.com/user-attachments/assets/a6c5d150-9dbf-4ec4-b253-4b685f3c8a82" />
