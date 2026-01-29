@@ -6,6 +6,7 @@ import RecordComments from '@/components/Comments';
 import { getCurrentUser } from '@/lib/auth';
 import SpotifyPlayer from '@/components/SpotifyPlayer';
 import RecordPageClient from '@/components/RecordPageClient';
+import Link from 'next/link';
 
 export default async function RecordPage(params: { params: Promise<{ slug: string }> }) {
     const currentUser = await getCurrentUser();
@@ -17,6 +18,7 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
         include: {
             comments: { include: { user: true }, orderBy: { createdAt: 'desc' } },
             savedBy: { where: { id: userId } },
+            author: true
         }
     });
 
@@ -101,7 +103,9 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
                             <h1 className="text-6xl md:text-8xl capitalize font-bold tracking-tighter leading-[0.85] text-secondary relative z-10">
                                 {splitTitle}<span className="text-zinc-300">.</span>
                             </h1>
-                            <p className="text-2xl md:text-3xl italic font-serif text-zinc-500 mt-4 meta-stagger">{record.phoneticOrCategory}</p>
+                            <Link href={`/profile/${record.authorId}`} className="text-2xl md:text-3xl italic font-serif text-zinc-500 mt-4 meta-stagger hover:cursor-pointer hover:underline">
+                                {record.author.name}
+                            </Link>
                         </div>
 
                         <div className="max-w-md meta-stagger">

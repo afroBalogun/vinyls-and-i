@@ -113,17 +113,21 @@ export async function updateRecord(formData: FormData) {
     revalidatePath(`/profile/${currentUserId}/records`);
 }
 
-
+// Get Catalogue Num
 export async function getNextCatalogNumber() {
     const lastRecord = await prisma.record.findFirst({
         orderBy: { createdAt: 'desc' },
         select: { catalogNumber: true }
     });
 
-    if (!lastRecord || !lastRecord.catalogNumber.includes('-')) return "VI-1001";
+    if (!lastRecord || !lastRecord.catalogNumber || !lastRecord.catalogNumber.includes('-')) {
+        return "1001";
+    }
 
-    const lastNum = parseInt(lastRecord.catalogNumber.split('-')[1]);
-    return `VI-${lastNum + 1}`;
+    const parts = lastRecord.catalogNumber.split('-');
+    const lastNum = parseInt(parts[1]);
+    
+    return isNaN(lastNum) ? "1001" : (lastNum + 1).toString();
 }
 
 // Post a Comment

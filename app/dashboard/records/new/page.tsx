@@ -1,13 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { createRecord } from "@/lib/actions";
+import { useEffect, useState } from "react";
+import { createRecord, getNextCatalogNumber } from "@/lib/actions";
 import SpotifySearch from "@/components/SpotifySearch";
 import { useCurrentUser } from "@/auth-provider";
 
 export default function NewRecordPage() {
     const currentUser = useCurrentUser();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [catNum, setCatNum] = useState("....");
+
+    useEffect(() => {
+        async function fetchCat() {
+            const nextId = await getNextCatalogNumber();
+            setCatNum(nextId);
+        }
+        fetchCat();
+    }, []);
 
     const [formData, setFormData] = useState({
         title: "",
@@ -71,10 +80,10 @@ export default function NewRecordPage() {
                 onResult={handleSpotifyResult}
                 onLoading={(val) => {
                     if (val) {
-                        setFormData(prev => ({ 
-                            ...prev, 
-                            title: "FETCHING_DATA...", 
-                            artistName: "FETCHING_DATA..." 
+                        setFormData(prev => ({
+                            ...prev,
+                            title: "FETCHING_DATA...",
+                            artistName: "FETCHING_DATA..."
                         }));
                         setTracks([]);
                     }
@@ -82,8 +91,8 @@ export default function NewRecordPage() {
             />
 
             {/* 2. The Main Archive Form */}
-            <form 
-                action={createRecordWithId} 
+            <form
+                action={createRecordWithId}
                 onSubmit={handleSubmit}
                 className={`space-y-12 transition-opacity duration-300 ${isSubmitting ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}
             >
@@ -99,34 +108,34 @@ export default function NewRecordPage() {
                         <div className="grid grid-cols-2 gap-6">
                             <div className="flex flex-col gap-1">
                                 <label className="text-[10px] font-mono uppercase text-zinc-500">Title*</label>
-                                <input 
+                                <input
                                     required
-                                    name="title" 
-                                    value={formData.title} 
-                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })} 
-                                    className="border border-zinc-200 p-3 text-sm focus:border-secondary outline-none placeholder:text-zinc-200" 
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                    className="border border-zinc-200 p-3 text-sm focus:border-secondary outline-none placeholder:text-zinc-200"
                                     placeholder="ENTRY_TITLE"
                                 />
                             </div>
                             <div className="flex flex-col gap-1">
                                 <label className="text-[10px] font-mono uppercase text-zinc-500">Artist*</label>
-                                <input 
+                                <input
                                     required
-                                    name="artistName" 
-                                    value={formData.artistName} 
-                                    onChange={(e) => setFormData({ ...formData, artistName: e.target.value })} 
-                                    className="border border-zinc-200 p-3 text-sm focus:border-secondary outline-none placeholder:text-zinc-200" 
+                                    name="artistName"
+                                    value={formData.artistName}
+                                    onChange={(e) => setFormData({ ...formData, artistName: e.target.value })}
+                                    className="border border-zinc-200 p-3 text-sm focus:border-secondary outline-none placeholder:text-zinc-200"
                                     placeholder="ARTIST_NAME"
                                 />
                             </div>
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-[10px] font-mono uppercase text-zinc-500">Metadata_Tagline</label>
-                            <input 
-                                name="metadataTagline" 
-                                value={formData.metadataTagline} 
-                                onChange={(e) => setFormData({ ...formData, metadataTagline: e.target.value })} 
-                                className="border border-zinc-200 p-3 text-sm italic font-serif focus:border-secondary outline-none" 
+                            <input
+                                name="metadataTagline"
+                                value={formData.metadataTagline}
+                                onChange={(e) => setFormData({ ...formData, metadataTagline: e.target.value })}
+                                className="border border-zinc-200 p-3 text-sm italic font-serif focus:border-secondary outline-none"
                             />
                         </div>
                     </div>
@@ -150,7 +159,9 @@ export default function NewRecordPage() {
                                     <span className="absolute left-3 font-mono text-xs text-zinc-400 select-none">VI-</span>
                                     <input
                                         name="catalogNumberOnly"
-                                        className="w-full border border-zinc-200 p-3 pl-9 text-xs font-mono focus:border-secondary outline-none"
+                                        readOnly
+                                        className="w-full border border-zinc-200 p-3 pl-9 text-xs font-mono bg-zinc-50/50 outline-none cursor-not-allowed"
+                                        value={catNum}
                                     />
                                 </div>
                             </div>

@@ -49,7 +49,7 @@ export default async function Dashboard({
 
             <div className="space-y-2">
                 {records.map(record => (
-                    <div key={record.id} className="flex justify-between items-center p-4 bg-zinc-50 border border-zinc-100 hover:border-zinc-300 transition-colors">
+                    <div key={record.id} className="flex justify-between items-center p-4 bg-primary border border-zinc-100 hover:border-zinc-300 transition-colors">
                         <div>
                             <span className="text-[10px] font-mono text-zinc-400">[{record.catalogNumber}]</span>
                             <h3 className="font-bold uppercase">{record.title}</h3>

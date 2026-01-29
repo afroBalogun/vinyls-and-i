@@ -3,21 +3,23 @@ import prisma from "@/lib/db";
 import Link from 'next/link';
 import { redirect } from "next/navigation";
 
-export default async function ProfilePage() {
+export default async function ProfilePage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
         redirect("/login")
     }
     const user = await prisma.user.findUnique({
-        where: { id: currentUser?.id },
+        where: { id: id },
         include: {
             savedRecords: true,
             observations: true,
         }
     });
 
-    if(!user) return null;
+    if (!user) return null;
 
     const isOwner = currentUser?.id === user.id;
 

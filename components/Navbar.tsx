@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import LoginBtn from "./LoginBtn";
+import { getCurrentUser } from "@/lib/auth";
 
 export default async function Navbar() {
-
+    const currentUser = await getCurrentUser();
     return (
         <nav className="fixed w-full px-4 md:px-10 py-4 flex flex-wrap items-center justify-between border-b border-zinc-200/50 bg-primary backdrop-blur-md z-100">
             {/* Logo */}
@@ -19,7 +20,7 @@ export default async function Navbar() {
                 <Link href="/records" className="font-mono text-[10px] md:text-xs tracking-widest text-decondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
                     Records
                 </Link>
-                <Link href="/profile" className="font-mono text-[10px] md:text-xs tracking-widest text-secondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
+                <Link href={`/profile/${currentUser?.id}`} className="font-mono text-[10px] md:text-xs tracking-widest text-secondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
                     Profile
                 </Link>
             </div>

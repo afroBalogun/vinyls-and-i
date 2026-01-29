@@ -10,7 +10,7 @@ import { useGSAP } from "@gsap/react";
 export default function FeedClient({ initialRecords, currentPage, totalPages }: { initialRecords: any[], currentPage: number, totalPages: number }) {
     const [viewMode, setViewMode] = useState<"album" | "list">("album");
     const container = useRef(null);
-
+    
     // Initial page load animation
     useGSAP(() => {
         const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1 } });
@@ -81,18 +81,18 @@ export default function FeedClient({ initialRecords, currentPage, totalPages }: 
                                             className="w-48 h-48 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
                                             alt="" 
                                         />
-                                        <div className="absolute inset-0 border-[12px] border-white/20 pointer-events-none" />
+                                        <div className="absolute inset-0 border-12 border-white/20 pointer-events-none" />
                                     </div>
                                     <div className="flex-1 flex flex-col justify-between">
                                         <div>
                                             <h2 className="text-2xl font-bold uppercase group-hover:translate-x-2 transition-transform duration-300">{record.title}</h2>
-                                            <p className="text-[10px] opacity-50 uppercase mb-4">
+                                            <Link href={`/profile/${record.authorId}`} className="text-[10px] opacity-50 uppercase mb-4">
                                                 {record.author?.name} // {new Date(record.createdAt).toLocaleDateString()}
-                                            </p>
+                                            </Link>
                                             <h3 className="text-lg opacity-60 mb-4">{record.artistName}</h3>
                                             <p className="text-sm italic">"{record.description}"</p>
                                         </div>
-                                        <div className="mt-8 opacity-20 group-hover:opacity-100 group-hover:translate-y-[-5px] transition-all duration-500">
+                                        <div className="mt-8 opacity-20 group-hover:opacity-100 group-hover:-translate-y-1.25 transition-all duration-500">
                                             <AudioVisualizer />
                                         </div>
                                     </div>
