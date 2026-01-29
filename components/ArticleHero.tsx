@@ -44,7 +44,7 @@ const ArticleHero = ({ id, slug, title, category, catalogNumber, year, descripti
 
     return (
         <Link href={`/records/${slug}`}>
-            <article ref={containerRef} className="relative min-h-screen w-full text-zinc-900 p-6 md:p-12 font-sans selection:bg-zinc-200 group  overflow-hidden">
+            <article ref={containerRef} className="relative min-h-screen w-full text-zinc-900 p-6 md:p-12 font-sans selection:bg-zinc-200 group  overflow-hidden bg- md:bg-transparent">
 
                 {/* Top Header - "Words" Style Logo */}
                 <div className="absolute top-8 right-8 md:top-12 md:right-12 meta-el">
@@ -91,7 +91,7 @@ const ArticleHero = ({ id, slug, title, category, catalogNumber, year, descripti
                                 <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)]" />
                             </div>
 
-                            <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#fdfdfd] via-[#fdfdfd]/40 to-transparent z-15 pointer-events-none" />
+                            <div className="absolute inset-y-0 left-0 w-1/2 bg-linear-to-r from-[#fdfdfd] via-[#fdfdfd]/40 to-transparent z-15 pointer-events-none" />
 
                             {/* Grainy Texture Overlay */}
                             <div className="absolute inset-0 pointer-events-none opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-20" />

@@ -14,7 +14,7 @@ export default async function RecordsPage() {
     });
     return (
         <main className="min-h-screen flex flex-col items-center justify-center py-20 px-5 md:px-10">
-            <div className="w-screen h-screen fixed top-0 left-0 -z-10 overflow-hidden flex items-center justify-center">
+            <div className="w-screen h-screen fixed top-0 left-0 -z-10 overflow-hidden flex items-center justify-center grayscale opacity-20">
                 <video src="/player.webm"
                     autoPlay
                     loop
