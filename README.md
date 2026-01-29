@@ -31,15 +31,15 @@ I'm a sucker for good music, and a content writer. The original idea for Vinyls 
    npm install
    ```
 3. **update env**
-    --DATABASE_URL
-    --BETTER_AUTH_URL
-    --BETTER_AUTH_SECRET
-    --GITHUB_CLIENT_ID
-    --GITHUB_CLIENT_SECRET
-    --SPOTIFY_CLIENT_ID
-    --SPOTIFY_CLIENT_SECRET
-    --GOOGLE_CLIENT_ID
-    --GOOGLE_CLIENT_SECRET
+*    --DATABASE_URL
+*    --BETTER_AUTH_URL
+*    --BETTER_AUTH_SECRET
+*    --GITHUB_CLIENT_ID
+*    --GITHUB_CLIENT_SECRET
+*    --SPOTIFY_CLIENT_ID
+*    --SPOTIFY_CLIENT_SECRET
+*    --GOOGLE_CLIENT_ID
+*   --GOOGLE_CLIENT_SECRET
 5. **Database Setup**
    ```bash
    npx prisma db push
