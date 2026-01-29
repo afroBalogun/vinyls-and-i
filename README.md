@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vinyls & I
 
-## Getting Started
+A shared digital archive for music heads. A space to document not just what we're listening to, but the stories and "etymology" behind every record.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🎧 The Core
+* **Community Feed:** A real-time feed of new entries, stories, and sonic discoveries from fellow collectors.
+* **Shared Etymology:** Beyond just "info" it's a place for stories, memories, and the origins of a sound to you.
+* **Sonic DNA:** Seamlessly add records with Spotify-synced metadata.
+* **Personal Vaults:** Personal profiles to showcase your collection and saved favorites.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📍 Why I Built This
+I'm a sucker for good music, and a content writer. The original idea for Vinyls and I to be my personal blog, but halfway through the project, I got inspired to make it a hub where, if you're anything like me, finding passion in sharing good music, this is your safe space.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🛠️ Tech Stack
+* **Next.js 16** (Turbopack)
+* **Better-Auth** (Social Authentication)
+* **Prisma** + **Vercel Postgres**
+* **GSAP** (Interaction Design)
+* **Tailwind CSS**
 
-## Learn More
+### 🚦 Getting Started
+1. **Clone the Repo**
+   ```bash
+   git clone [https://github.com/afroBalogun/vinyls-and-i](https://github.com/afroBalogun/vinyls-and-i)
+   ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+3. **update env**
+    --DATABASE_URL
+    --BETTER_AUTH_URL
+    --BETTER_AUTH_SECRET
+    --GITHUB_CLIENT_ID
+    --GITHUB_CLIENT_SECRET
+    --SPOTIFY_CLIENT_ID
+    --SPOTIFY_CLIENT_SECRET
+    --GOOGLE_CLIENT_ID
+    --GOOGLE_CLIENT_SECRET
+5. **Database Setup**
+   ```bash
+   npx prisma db push
+   ```
+6. **Run Development**
+   ```bash
+   npm run dev
+   ```
