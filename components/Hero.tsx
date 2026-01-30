@@ -6,65 +6,48 @@ import { LoadingScreen } from './LoadingScreen';
 /**
  * MAIN HERO COMPONENT
  */
+
 export default function VinylHero() {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-        const handleResize = () => {
-            setIsLoaded(false);
-            setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-        };
-
-        let resizeTimer: NodeJS.Timeout;
-        const debouncedResize = () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(handleResize, 150);
-        };
-
-        window.addEventListener('resize', debouncedResize);
-        return () => window.removeEventListener('resize', debouncedResize);
+        setMounted(true);
     }, []);
 
     return (
-        <>
-            <LoadingScreen
-                isFinished={isLoaded} 
-                onComplete={() => setIsLoaded(true)} 
-            />
+        <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-primary">
+            <HeroMetadata />
 
-            <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-primary">
-                <HeroMetadata />
-
-                {/* The Vinyl Disk as an Optimized Image */}
-                <div className={`relative w-[85vw] h-[45vw] max-w-162.5 md:max-w-200 transition-all duration-1000 ease-out ${
-                    isLoaded ? "opacity-100 scale-100 rotate-0 blur-0" : "opacity-0 scale-95 rotate-12 blur-sm"
-                }`}>
-                    <div className="relative w-full h-full animate-spin-">
-                        <Image
-                            src="/vinyl.png"
-                            alt="Vinyl Record Archive"
-                            fill
-                            priority
-                            className="object-contain"
-                        />
-                    </div>
+            {/* The Vinyl Disk - Animation state controlled by 'mounted' */}
+            <div className={`relative w-[85vw] h-[45vw] max-w-162.5 md:max-w-200 transition-all duration-1000 delay-300 ease-out ${
+                mounted ? "opacity-100 scale-100 rotate-0 blur-0" : "opacity-0 scale-95 rotate-12 blur-sm"
+            }`}>
+                <div className="relative w-full h-full">
+                    <Image
+                        src="/vinyl.png"
+                        alt="Vinyl Record Archive"
+                        fill
+                        priority
+                        className="object-contain"
+                    />
                 </div>
+            </div>
 
-                <div className={`absolute bottom-12 text-center transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-                    <h1 className="text-sm tracking-[0.5em] text-zinc-500 uppercase">
-                        Vinyls <span className="italic font-serif">&</span> I
-                    </h1>
-                </div>
-            </section>
-        </>
+            {/* Bottom Title */}
+            <div className={`absolute bottom-12 text-center transition-all duration-700 delay-500 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
+                <h1 className="text-sm tracking-[0.5em] text-zinc-500 uppercase">
+                    Vinyls <span className="italic font-serif">&</span> I
+                </h1>
+            </div>
+        </section>
     );
 }
 
 export function HeroMetadata() {
     return (
-        <div className="absolute inset-0 px-5 md:px-10 py-20 pointer-events-none flex flex-col justify-between uppercase font-mono text-[8px] tracking-[0.2em] text-zinc-500">
+        <div className="absolute inset-0 px-5 md:px-10 py-20 pointer-events-none flex flex-col justify-between uppercase font-mono text-[6px] md:text-[8px] tracking-[0.2em] text-zinc-500">
             <div className="flex justify-between items-start">
                 <div className="space-y-1">
                     <p>Vinyls & I</p>
@@ -77,7 +60,7 @@ export function HeroMetadata() {
             </div>
 
             <div className="flex justify-between items-end">
-                <div className="max-w-[190px]">
+                <div className="max-w-36 md:max-w-47.5">
                     <p className="leading-relaxed">
                         A digital archive dedicated to the intersection of tactile sound and modern prose.
                     </p>

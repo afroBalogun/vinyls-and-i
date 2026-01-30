@@ -29,7 +29,7 @@ export function LoadingScreen({ isFinished, onComplete }: { isFinished: boolean,
 
     return (
         <div
-            className={`fixed inset-0 z-[200] bg-[#fdfdfd] flex flex-col items-center justify-center transition-transform duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+            className={`fixed inset-0 z-200 bg-[#fdfdfd] flex flex-col items-center justify-center transition-transform duration-1000 ease-luxury ${
                 isFinished ? "-translate-y-full" : "translate-y-0"
             }`}
         >
@@ -44,7 +44,7 @@ export function LoadingScreen({ isFinished, onComplete }: { isFinished: boolean,
                     {progress.toString().padStart(3, '0')}
                 </p>
                 <div
-                    className="h-[1px] bg-zinc-900 transition-all duration-300"
+                    className="h-px bg-zinc-900 transition-all duration-300"
                     style={{ width: `${progress}%` }}
                 />
             </div>
