@@ -20,7 +20,7 @@ export default function About() {
     const pulseTitleRef = useRef<HTMLHeadingElement>(null);
 
     useGSAP(() => {
-        // --- 1. CONTINUOUS SPIN (Handled by GSAP to avoid conflicts) ---
+        //  CONTINUOUS SPIN 
         gsap.to(orderImgRef.current, {
             rotation: 360,
             duration: 12,
@@ -29,7 +29,7 @@ export default function About() {
             transformOrigin: "center center"
         });
 
-        // --- 2. SLIDE IN FROM RIGHT (Half-past the edge) ---
+        // SLIDE IN FROM RIGHT
         const introTl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#featured",
@@ -39,24 +39,24 @@ export default function About() {
 
         introTl.fromTo(orderImgRef.current,
             {
-                xPercent: 150, // Start completely off-screen to the right
+                xPercent: 150,
                 opacity: 0
             },
             {
-                xPercent: 50,  // End with exactly 50% of the image past the edge
+                xPercent: 50,
                 opacity: 0.2,
                 duration: 2,
                 ease: "power3.out"
             }
         )
-            // --- 3. TYPING EFFECT ---
+            // TYPING EFFECT
             .to(initiatedTextRef.current, {
                 duration: 1.5,
                 text: "ARCHIVE_INITIATED: 2026",
                 ease: "none",
             }, "-=0.5");
 
-        // --- 4. ADAPTIVE STAGGER ---
+        // ADAPTIVE STAGGER
         const cards = gsap.utils.toArray(".community-card");
         const isMobile = window.innerWidth < 768;
 
@@ -66,17 +66,17 @@ export default function About() {
                 start: "top 85%",
             },
             opacity: 0,
-            x: isMobile ? 0 : -60, // Slide from left on desktop
-            y: isMobile ? 60 : 0,  // Slide from bottom on mobile
+            x: isMobile ? 0 : -60,
+            y: isMobile ? 60 : 0,
             stagger: 0.2,
             duration: 1,
             ease: "power2.out"
         });
 
-        // --- 5. SYSTEM PULSE EFFECT ---
+        // SYSTEM PULSE EFFECT
         const pulseTl = gsap.timeline({
             repeat: -1,
-            repeatDelay: 2, // Time between "heartbeats"
+            repeatDelay: 2,
             scrollTrigger: {
                 trigger: "#system",
                 start: "top center",
@@ -85,7 +85,7 @@ export default function About() {
         });
 
         pulseTl
-            // First Beat: Sudden sharp scale & opacity jump
+            // First Beat
             .to(pulseTitleRef.current, {
                 opacity: 1,
                 scale: 1.05,
@@ -125,12 +125,11 @@ export default function About() {
                 yoyo: true,
                 ease: "none"
             })
-            // Reset to idle
+            // Reset
             .to(pulseTitleRef.current, { x: 0, opacity: 0.4, duration: 0.1 });
 
     }, { scope: containerRef });
 
-    // ... (Keep your IntersectionObserver useEffects)
 
     return (
         <main ref={containerRef} className="w-full text-secondary font-agdasima bg-primary overflow-x-hidden">
@@ -158,6 +157,17 @@ export default function About() {
             </section>
 
             {/* ... (Archive Section) */}
+            <section id="archive" className="min-h-screen w-full p-5 flex items-center justify-center bg-[#f4f4f4]/5">
+                <div className="max-w-3xl text-center flex flex-col gap-10">
+                    <p className="text-2xl md:text-4xl leading-tight">
+                        The Deep Archive is a digital repository engineered to bridge the gap between
+                        high-velocity streaming data and the physical legacy of 33⅓ RPM vinyl.
+                        We don't just play music; we catalogue the vibration.
+                    </p>
+                    <ArchiveGrid />
+                </div>
+
+            </section>
 
             {/* SECTION 3: COMMUNITY */}
             <section id="community" className="min-h-screen w-full p-5 flex flex-col justify-center">
@@ -178,6 +188,20 @@ export default function About() {
                 </div>
             </section>
 
+            {/* SECTION 4: LOGS (Ledger) */}
+            <section id="logs" className="min-h-screen w-full p-5 flex flex-col items-center justify-center">
+                <div className="w-full max-w-2xl">
+                    <h2 className="text-3xl font-bold uppercase mb-8 italic">The Collaborative Ledger</h2>
+                    <p className="mb-6 text-secondary font-mono text-sm">COMMUNITY_INPUT_NODE_REQ_01...</p>
+                    <textarea
+                        name="description"
+                        rows={4}
+                        className="w-full border border-zinc-200 p-3 text-sm focus:border-zinc-900 outline-none bg-transparent"
+                        placeholder="ADD_TO_ARCHIVE_LOGS..."
+                    />
+                </div>
+            </section>
+
             {/* SECTION 5: SYSTEM */}
             <section id="system" className="min-h-screen w-full p-5 flex flex-col items-center justify-center">
                 <h2 ref={pulseTitleRef} className="text-sm font-mono uppercase tracking-[0.5em] mb-12 text-secondary opacity-40 whitespace-nowrap">
@@ -195,3 +219,5 @@ export default function About() {
         </main>
     );
 }
+
+
