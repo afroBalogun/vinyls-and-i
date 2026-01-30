@@ -145,7 +145,7 @@ export default function About() {
                         ref={orderImgRef}
                         src="/order.png"
                         alt=""
-                        className="absolute right-0 top-1/2 -translate-y-1/2 h-[60vh] md:h-[85vh] pointer-events-none z-40"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 h-[40vh] md:h-[85vh] pointer-events-none z-40"
                     />
 
                     <div className="w-full text-right z-10 pr-4 md:pr-10">
