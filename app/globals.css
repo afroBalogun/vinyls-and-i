@@ -39,3 +39,7 @@
   100% { transform: scaleY(2.2); }
 }
 
+video {
+    background: transparent !important;
+    -webkit-mask-image: -webkit-radial-gradient(white, black); 
+}
