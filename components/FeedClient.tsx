@@ -73,31 +73,34 @@ export default function FeedClient({ initialRecords, currentPage, totalPages }: 
                 {viewMode === "album" ? (
                     <div className="space-y-16">
                         {initialRecords.map((record) => (
-                            <Link key={record.id} href={`/records/${record.slug}`} className="block group feed-item">
+                            <div key={record.id} className="relative group feed-item">
                                 <div className="flex flex-col md:flex-row gap-8">
                                     <div className="w-full md:w-1/3 aspect-square bg-zinc-100 border border-secondary/10 flex items-center justify-center relative overflow-hidden">
                                         <img 
                                             src={record.artistImage} 
                                             className="w-48 h-48 object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
                                             alt="" 
+                                            onError={(e) => { e.currentTarget.hidden = true; }}
                                         />
                                         <div className="absolute inset-0 border-12 border-white/20 pointer-events-none" />
                                     </div>
                                     <div className="flex-1 flex flex-col justify-between">
                                         <div>
                                             <h2 className="text-2xl font-bold uppercase group-hover:translate-x-2 transition-transform duration-300">{record.title}</h2>
-                                            <Link href={`/profile/${record.authorId}`} className="text-[10px] opacity-50 uppercase mb-4">
+                                            <Link href={`/profile/${record.authorId}`} className="relative z-10 text-[10px] opacity-50 uppercase mb-4 hover:underline">
                                                 {record.author?.name} // {new Date(record.createdAt).toLocaleDateString()}
                                             </Link>
                                             <h3 className="text-lg opacity-60 mb-4">{record.artistName}</h3>
-                                            <p className="text-sm italic">"{record.description}"</p>
+                                            {record.description && <p className="text-sm italic">"{record.description}"</p>}
                                         </div>
                                         <div className="mt-8 opacity-20 group-hover:opacity-100 group-hover:-translate-y-1.25 transition-all duration-500">
                                             <AudioVisualizer />
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
+                                {/* Card-wide link as a sibling overlay: a profile <a> can't nest inside a record <a> */}
+                                <Link href={`/records/${record.slug}`} aria-label={record.title} className="absolute inset-0" />
+                            </div>
                         ))}
                     </div>
                 ) : (

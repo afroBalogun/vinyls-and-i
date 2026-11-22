@@ -87,18 +87,9 @@ export default async function PublicProfileArchive({
                                 <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-tighter">
                                     VI-{record.catalogNumber || "N/A"} // {record.year || "----"}
                                 </span>
-                                <span className="text-[9px] font-mono text-zinc-500">
-                                    {record.tempo} BPM
-                                </span>
                             </div>
                                 <h3 className="text-sm font-bold uppercase tracking-tight leading-none group-hover:underline">{record.title}</h3>
                             <p className="text-xs text-zinc-500 uppercase font-medium">{record.artistName}</p>
-                            
-                            <div className="flex gap-2 pt-2">
-                                <span className="px-1.5 py-0.5 border border-zinc-200 text-[8px] font-mono text-zinc-400 uppercase">
-                                    Key: {record.key || "UNSET"}
-                                </span>
-                            </div>
                         </div>
                     </Link>
                 ))}

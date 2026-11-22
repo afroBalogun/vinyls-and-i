@@ -71,18 +71,6 @@ export default async function EditRecordPage({ params }: { params: Promise<{ id:
                                 <label className="text-[10px] font-mono uppercase text-zinc-500">Year</label>
                                 <input name="year" defaultValue={record.year} className="border border-zinc-200 p-2 text-sm bg-zinc-50 outline-secondary/20" />
                             </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-[10px] font-mono uppercase text-zinc-500">BPM / Tempo</label>
-                                <input name="tempo" defaultValue={record.tempo} className="border border-zinc-200 p-2 text-sm bg-zinc-50 outline-secondary/20" />
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-[10px] font-mono uppercase text-zinc-500">Key</label>
-                                <input name="key" defaultValue={record.key} className="border border-zinc-200 p-2 text-sm bg-zinc-50 outline-secondary/20" />
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                            <label className="text-[10px] font-mono uppercase text-zinc-500">Loudness (LUFS/dB)</label>
-                            <input name="loudness" defaultValue={record.loudness} className="border border-zinc-200 p-2 text-sm bg-zinc-50 outline-secondary/20" />
                         </div>
                         <div className="flex flex-col gap-1">
                             <label className="text-[10px] font-mono uppercase text-zinc-500">Category / Phonetic</label>

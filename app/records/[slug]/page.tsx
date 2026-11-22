@@ -1,7 +1,6 @@
 import React from 'react';
 import prisma from '@/lib/db';
 import SaveButton from '@/components/SaveButton';
-import TechnicalManifest from '@/components/TechnicalManifest';
 import RecordComments from '@/components/Comments';
 import { getCurrentUser } from '@/lib/auth';
 import SpotifyPlayer from '@/components/SpotifyPlayer';
@@ -47,7 +46,7 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
                 <header className="flex justify-between items-start mb-12 relative z-50">
                     <div className="flex flex-col space-y-1 meta-stagger">
                         <span className="text-xs font-bold tracking-widest">({record.year}) "{record.metadataTagline}"</span>
-                        <span className="text-[10px] text-zinc-400 font-mono tracking-tighter">Published: {record.id}</span>
+                        <span className="text-[10px] text-zinc-400 font-mono tracking-tighter">Published: {record.createdAt.toLocaleDateString()}</span>
                     </div>
 
                     <div className="relative meta-stagger">
@@ -75,12 +74,6 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
                                 />
                                 <div className="relative z-10 w-3/4 h-3/4 border border-zinc-300 shadow-2xl grayscale transition-transform duration-1000 group-hover:scale-[1.02]">
                                     <img src={record.artistImage} alt={record.artistName} className="w-full h-full object-cover" />
-                                    <div className="spec-box absolute top-4 right-4 bg-black text-white p-3 font-mono text-[10px] leading-tight space-y-1">
-                                        <p className="border-b border-white/20 pb-1 opacity-70">Specs:</p>
-                                        <p>Tempo: {record.tempo}</p>
-                                        <p>Key: {record.key}</p>
-                                        <p>Loudness: {record.loudness}</p>
-                                    </div>
                                 </div>
                             </div>
                             <div className="mt-4 flex flex-col text-[10px] tracking-widest text-zinc-500 uppercase font-medium meta-stagger p-2">
@@ -173,7 +166,6 @@ export default async function RecordPage(params: { params: Promise<{ slug: strin
                 )}
 
                 <RecordComments recordId={record.id} initialComments={record.comments} />
-                <TechnicalManifest record={record} />
                 <div className="fixed top-0 left-12 w-[1px] h-full bg-zinc-100 -z-50 hidden md:block" />
                 <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-[100]" />
             </main>

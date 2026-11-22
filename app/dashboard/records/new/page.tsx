@@ -25,9 +25,6 @@ export default function NewRecordPage() {
         albumCover: "",
         artistImage: "",
         spotifyId: "",
-        tempo: "",
-        key: "",
-        loudness: "",
         metadataTagline: "DIGITAL PRESSING",
         etymology: "",
         description: "",
@@ -43,9 +40,6 @@ export default function NewRecordPage() {
             albumCover: data.albumCover || "",
             artistImage: data.artistImage || "",
             spotifyId: data.spotifyId || "",
-            tempo: data.tempo || "",
-            key: data.key || "",
-            loudness: data.loudness || "",
             metadataTagline: "DIGITAL PRESSING",
             etymology: "",
             description: ""
@@ -98,7 +92,6 @@ export default function NewRecordPage() {
             >
                 {/* Hidden Data Buffers */}
                 <input type="hidden" name="trackListJson" value={JSON.stringify(tracks)} />
-                <input type="hidden" name="loudness" value={formData.loudness} />
                 <input type="hidden" name="spotifyId" value={formData.spotifyId} />
 
                 {/* SECTION 01: PRIMARY METADATA */}
@@ -164,24 +157,6 @@ export default function NewRecordPage() {
                                         value={catNum}
                                     />
                                 </div>
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-[10px] font-mono uppercase text-zinc-500">BPM</label>
-                                <input
-                                    name="tempo"
-                                    value={formData.tempo}
-                                    onChange={(e) => setFormData({ ...formData, tempo: e.target.value })}
-                                    className="border border-zinc-200 p-3 text-xs font-mono focus:border-secondary outline-none"
-                                />
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-[10px] font-mono uppercase text-zinc-500">Key</label>
-                                <input
-                                    name="key"
-                                    value={formData.key}
-                                    onChange={(e) => setFormData({ ...formData, key: e.target.value })}
-                                    className="border border-zinc-200 p-3 text-xs font-mono focus:border-secondary outline-none"
-                                />
                             </div>
                         </div>
                     </div>

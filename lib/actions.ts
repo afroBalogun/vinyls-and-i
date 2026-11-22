@@ -36,15 +36,16 @@ export async function createRecord(userId: string, formData: FormData) {
             year: formData.get("year") as string || "2024",
             description: formData.get("description") as string || "",
             catalogNumber: finalCatalogNumber,
-            tempo: formData.get("tempo") as string || "N/A",
-            key: formData.get("key") as string || "N/A",
+            // columns still required by the schema; Spotify no longer serves audio features
+            tempo: "N/A",
+            key: "N/A",
             category: formData.get("category") as string || "Archive Entry",
             metadataTagline: formData.get("metadataTagline") as string || "DIGITAL PRESSING",
             phoneticOrCategory: formData.get("phoneticOrCategory") as string || "[ENTRY]",
             etymology: formData.get("etymology") as string || "Default archival data.",
             albumCover: formData.get("albumCover") as string || "/placeholder.jpeg",
             artistImage: formData.get("artistImage") as string || "/placeholder-artist.jpeg",
-            loudness: formData.get("loudness") as string || "-0.0 dB",
+            loudness: "N/A",
             spotifyId: formData.get("spotifyId") as string || "none",
             author: {
                 connect: { id: userId }
@@ -91,8 +92,6 @@ export async function updateRecord(formData: FormData) {
             artistName: formData.get("artistName") as string,
             description: formData.get("description") as string,
             catalogNumber: formData.get("catalogNumber") as string || "000",
-            tempo: formData.get("tempo") as string || "N/A",
-            key: formData.get("key") as string || "N/A",
             category: formData.get("category") as string || "Archive Entry",
             year: formData.get("year") as string,
             metadataTagline: formData.get("metadataTagline") as string,
@@ -100,7 +99,6 @@ export async function updateRecord(formData: FormData) {
             etymology: formData.get("etymology") as string,
             albumCover: formData.get("albumCover") as string,
             artistImage: formData.get("artistImage") as string,
-            loudness: formData.get("loudness") as string,
             spotifyId: formData.get("spotifyId") as string,
             tracks: {
                 create: []

@@ -26,12 +26,6 @@ export default function RecordPageClient({ record, tracks, children }: any) {
             ease: "expo.inOut"
         }, 0.1);
 
-        tl.from(".spec-box", {
-            x: 20,
-            opacity: 0,
-            duration: 0.8,
-        }, "-=0.5");
-
         tl.from(".meta-stagger", {
             y: 10,
             opacity: 0,

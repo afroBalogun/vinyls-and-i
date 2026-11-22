@@ -1,12 +1,5 @@
 "use server";
 
-const mapKeyToNote = (key: number, mode: number) => {
-    const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-    const keyName = notes[key] || "N/A";
-    const modeName = mode === 1 ? "Major" : "Minor";
-    return `${keyName} ${modeName}`;
-};
-
 export async function getSpotifyToken() {
     const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
@@ -62,36 +55,9 @@ export async function getDeepArchiveData(albumId: string) {
         artistImage = artistData.images?.[0]?.url || "";
     }
 
-    const firstTrackId = album.tracks.items[0]?.id;
-    let technicalData = { tempo: "N/A", key: "N/A", loudness: "N/A" };
-    let debugInfo = {};
-
-    if (firstTrackId) {
-        const featRes = await fetch(`https://api.spotify.com/v1/audio-features/${firstTrackId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-
-        debugInfo = { status: featRes.status, trackId: firstTrackId };
-        if (featRes.ok) {
-            const featData = await featRes.json();
-            debugInfo = { ...debugInfo, featData };
-            technicalData = {
-                tempo: featData.tempo ? Math.round(featData.tempo).toString() : "N/A",
-                key: (featData.key != null && featData.mode != null)
-                    ? mapKeyToNote(featData.key, featData.mode)
-                    : "N/A",
-                loudness: typeof featData.loudness === 'number'
-                    ? featData.loudness.toFixed(1)
-                    : "N/A"
-            };
-        }
-    }
-
     return {
-        ...technicalData,
         artistImage,
         spotifyId: album.id,
-        debug: debugInfo,
         tracks: album.tracks.items.map((t: any, index: number) => ({
             number: (index + 1).toString().padStart(2, '0'),
             title: t.name,

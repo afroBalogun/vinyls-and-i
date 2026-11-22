@@ -37,7 +37,6 @@ export default function Footer() {
                         <h3 className="opacity-40 mb-2 font-bold">External</h3>
                         <Link href="https://developer.spotify.com/documentation/web-api" className="hover:text-secondary transition-colors">Spotify_API</Link>
                         <Link href="https://github.com/afroBalogun/vinyls-and-i" className="hover:text-secondary transition-colors">GitHub_Src</Link>
-                        <Link href="#" className="hover:text-secondary transition-colors">Documentation</Link>
                     </div>
                 </div>
 

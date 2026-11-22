@@ -174,10 +174,9 @@ export default function About() {
                 <h2 className="text-3xl md:text-5xl font-semibold uppercase mb-16 text-center">
                     Community Directives
                 </h2>
-                <div ref={cardsContainerRef} className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+                <div ref={cardsContainerRef} className="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto">
                     {[
                         { title: "Crowdsourced Context", text: "Every archive entry is a living document. We provide the technical metadata; you provide the history." },
-                        { title: "The Global Listening Room", text: "Integrating live trending data to create a real-time map of our shared sonic landscape." },
                         { title: "Open Dialogue", text: "Through our archive logs, listeners connect over the technical nuances of their favorite albums." }
                     ].map((dir, i) => (
                         <div key={i} className="community-card border-l border-secondary pl-6">
@@ -185,20 +184,6 @@ export default function About() {
                             <p className="text-lg opacity-80">{dir.text}</p>
                         </div>
                     ))}
-                </div>
-            </section>
-
-            {/* SECTION 4: LOGS (Ledger) */}
-            <section id="logs" className="min-h-screen w-full p-5 flex flex-col items-center justify-center">
-                <div className="w-full max-w-2xl">
-                    <h2 className="text-3xl font-bold uppercase mb-8 italic">The Collaborative Ledger</h2>
-                    <p className="mb-6 text-secondary font-mono text-sm">COMMUNITY_INPUT_NODE_REQ_01...</p>
-                    <textarea
-                        name="description"
-                        rows={4}
-                        className="w-full border border-zinc-200 p-3 text-sm focus:border-zinc-900 outline-none bg-transparent"
-                        placeholder="ADD_TO_ARCHIVE_LOGS..."
-                    />
                 </div>
             </section>
 

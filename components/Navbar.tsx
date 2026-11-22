@@ -22,9 +22,11 @@ export default async function Navbar() {
                     <Link href="/records" className="font-mono text-[10px] md:text-xs tracking-widest text-decondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
                         Records
                     </Link>
-                    <Link href={`/profile/${currentUser?.id}`} className="font-mono text-[10px] md:text-xs tracking-widest text-secondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
-                        Profile
-                    </Link>
+                    {currentUser && (
+                        <Link href={`/profile/${currentUser.id}`} className="font-mono text-[10px] md:text-xs tracking-widest text-secondary hover:text-zinc-500 transition-all uppercase whitespace-nowrap">
+                            Profile
+                        </Link>
+                    )}
                 </div>
 
                 {/* Actions */}
